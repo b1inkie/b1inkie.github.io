@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: url(../images/mouse/NormalSkyrim.cur), auto;
+    
+}
+
+body {
+
+    background-color: #f2f2f2;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+body::-webkit-scrollbar-thumb {
+  /*border-radius: 100px;*/
+  background-color: skyblue;
+  background-image: -webkit-linear-gradient(
+   
+  );
+}
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #ededed;
+}
+.intro {
+    z-index: 90;
+    position: relative;
+    width: 80.5%;
+    height: 92vh;
+    left: 260px;
+    resize: both;
+    overflow: scroll;
+}
+/*intro scroll*/
+.intro::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+.intro::-webkit-scrollbar-thumb {
+  /*border-radius: 100px;*/
+  background-color: skyblue;
+  background-image: -webkit-linear-gradient(
+   
+  );
+}
+.intro::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #ededed;
+}
+.workzone{
+    position: relative;
+    margin-left: 60px;
+    background-color: #f2f2f2;
+}
+/*sidebar-png*/
+.sidebarpng {
+    z-index: 80;
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+}
+/*head*/
+.bigbox {
+    z-index: 99;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
+}
+
+.bigbox input {
+    display: none;
+}
+
+.bigbox label {
+    display:block;
+    position: absolute;
+    top: 10px;
+    left: 240px;
+    font-size: 20px;
+    font-family:Calibri;
+    color: #666;
+    padding:2px 20px;
+    padding-left: 20px;
+    transition: all .5s;
+
+}
+.bigbox label:hover {
+    cursor: url(../images/mouse/camp.cur), auto;
+}
+.bigbox label img:hover {
+    cursor: url(../images/mouse/camp.cur), auto;
+}
+.bigbox label span:hover {
+    cursor: url(../images/mouse/camp.cur), auto;
+}
+
+/*sidebar*/
+.bigbox ul {
+    z-index: 100;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+    background-color: #232323;
+    transition: all .5s;
+
+    resize: both;
+    overflow: auto;
+    white-space: nowrap;
+
+
+}
+/*sidebar-scroll settings*/
+.bigbox ul::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.bigbox ul::-webkit-scrollbar-thumb {
+  /*border-radius: 100px;*/
+  background-color: skyblue;
+  background-image: -webkit-linear-gradient(
+   
+  );
+}
+.bigbox ul::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #ededed;
+}
+
+.bigbox ul li {
+    width: 100%;
+    height: 70px;
+    margin-bottom: -20px;
+    list-style: none;
+
+}
+
+.bigbox ul li:first-child {
+    transition: all 1s;
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.bigbox ul li:first-child img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0 25px;
+}
+
+.bigbox ul li:first-child span {
+    color: #fff;
+    font-size: 18px;
+    font-family:Calibri;
+    white-space: nowrap;
+
+}
+
+.bigbox ul li a {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    margin-top: 0px;
+    color: #d2d2d2;
+    font-weight: 550;
+    text-decoration: none;
+    transition: all .5s;
+}
+
+.bigbox ul li a img {
+    width: 30px;
+    height: 30px;
+    margin: 0 25px;
+    transform:translate(-20px);
+}
+
+.bigbox ul li a span {
+    font-size: 18px;
+    font-family:Calibri;
+    transform:translate(-40px);
+}
+
+.bigbox ul li a:hover {
+    color: #fff;
+    background-color: rgb(47, 183, 204);
+    cursor: url(../images/mouse/main_quest.cur), pointer;
+}
+.bigbox ul li a span:hover {
+    cursor: url(../images/mouse/main_quest.cur), pointer;
+}
+.bigbox ul li a img:hover {
+    cursor: url(../images/mouse/main_quest.cur), pointer;
+}
+/*c*/
+.bigbox ul li b {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 100%;
+    margin-top: 0px;
+    color: #d2d2d2;
+    font-weight: normal;
+    text-decoration: none;
+    transition: all .5s;
+}
+
+.bigbox ul li b img {
+    width: 25px;
+    height: 25px;
+    margin: 0 25px;
+    transform:translate(-10px);
+}
+
+.bigbox ul li b span {
+    font-size: 14px;
+    font-family:Calibri;
+    transform:translate(-30px);
+}
+
+.bigbox ul li b:hover {
+    color: #fff;
+    background-color: rgb(47, 183, 204);
+    cursor: url(../images/mouse/main_quest.cur), pointer;
+}
+
+
+.bigbox input:checked+label {
+    left: 0;
+}
+
+.bigbox input:checked~ul {
+    left: -240px;
+}
