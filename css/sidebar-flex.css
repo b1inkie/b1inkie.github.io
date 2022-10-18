@@ -54,8 +54,25 @@ body::-webkit-scrollbar-track {
 }
 .workzone{
     position: relative;
-    margin-left: 60px;
+    left: 60px;
     background-color: #f2f2f2;
+    resize: both;
+    overflow: scroll;
+}
+.workzone::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+.workzone::-webkit-scrollbar-thumb {
+  /*border-radius: 100px;*/
+  background-color: skyblue;
+  background-image: -webkit-linear-gradient(
+   
+  );
+}
+.workzone::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #ededed;
 }
 /*sidebar-png*/
 .sidebarpng {
