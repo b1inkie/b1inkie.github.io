@@ -21,7 +21,7 @@
     (assign, ":enemies_closest", ":enemies"),
 (try_end),
 (try_begin),
-    (neq|eq, ":enemies_closest", -1), #当:enemies_closest不为-1即有敌人时
+    (neq, ":enemies_closest", -1), #当:enemies_closest不为-1即有敌人时
     (agent_get_horse,":enemies_horse",":enemies_closest"), #获取最近敌对单位的马匹
     (try_begin),
         (neg|eq,":enemies_horse",-1), #当获取值不为-1即有马时
@@ -59,7 +59,7 @@
     (assign, ":enemies_closest", ":enemies"),
 (try_end),
 (try_begin),
-    (neq|eq, ":enemies_closest", -1),
+    (neq, ":enemies_closest", -1),
     (agent_get_horse,":enemies_horse",":enemies_closest"),
     (try_begin),
         (neg|eq,":enemies_horse",-1),
