@@ -1,0 +1,82 @@
+<br><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/intro-01.png" alt="范例" title="范例" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></figure><br>
+##做一个以上效果的物品额外描述
+#####需要修改的位置有3处
+>1. <span style="color:#5bdaed;">scripts.txt</span> 
+2. <span style="color:#5bdaed;">quick_strings.txt</span>  英文描述
+3. <span style="color:#5bdaed;">..\languages\cns\quick_strings.csv</span>  汉化
+
+#####先写中英文描述
+在quick_strings.txt最下面添加一行：
+**``qstr_details_dragoncoin to_be_added.``**
+<span style="color:#5bdaed;">注意</span> quick_strings.txt的第一行的数字为所有字符串的行数，我们加了1行这里就要加1，或者你拿总行数减去1行即可。
+汉化：
+**``qstr_details_dragoncoin|找 奴 隶 贩 子 升 级 雇 佣 兵 或 交 付 给 领 主``**
+汉化要注意空格, 用<span style="color:#5bdaed;">^</span>来换行
+#####scripts.txt修改
+搜game_get_item_extra_text
+<br><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/extratext.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></figure><br>
+可以看到第一个数字 170 则为game_get_item_extra_text中的代码行数；那么我们要加多少行代码，这里就要加几。
+如果我们只需要给物品添加一条描述，一共需要写<span style="color:#5bdaed;">6</span>行代码，所以这里170+6=176。
+
+我们在这一段最后添加代码（注意空格）:
+**`4 0 31 2 1224979098644774912 (物品ID) 31 2 1224979098644774913 0 60 1 (英文描述ID) 2075 1 (十进制颜色) 3 0`**
+
+物品ID怎么查：
+1.使用MBCodeEditor
+2.用魔球新建一个触发器,写好py码，点TXT。
+例如**`(eq, ":var_0", "itm_b1_item_valuable"),`**
+这里"itm_b1_item_valuable"是我的物品，你写你的物品
+点一下TXT：
+<span style="color:#0000ff;">31</span> <span style="color:#ff0000;">2</span> <span style="color:#556b2f;">1224979098644774912 288230376151713593</span>
+后面这个<span style="color:#556b2f;">288230376151713593</span>就是你的物品数字ID
+
+英文描述ID怎么查（和上面一样）：
+**`(eq, ":var_0", "qstr_details_dragoncoin"),`**
+这里"qstr_details_dragoncoin"是我的英文描述，你写你的英文描述
+转成TXT
+最后面的数字就是ID，我这里是1585267068834418149
+
+十进制颜色（网上都是）：
+<br><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/colors.png" alt="十进制颜色" title="十进制颜色" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></figure><br>
+
+最终我的代码便是：
+4 0 31 2 1224979098644774912 <span style="color:#5bdaed;">288230376151713593</span> 31 2 1224979098644774913 0 60 1 <span style="color:#5bdaed;">1585267068834418149</span> 2075 1 <span style="color:#ffd700;">16776960</span> 3 0 
+
+完事。
+
+**<span style="color:#dc143c;">写完之后我发现了一个问题，我这边的描述总是显示我添加的上一行描述，原因暂不清楚。不知道大家有没有问题。解决方式倒是很简单：就在quick_string下面再添加一条废的描述，把你的英文描述的纯数字ID+1即可。</span>**
+
+####那么怎么添加多个描述呢
+#####先给出上述代码的py版：
+```python
+(try_begin),
+    (eq, ":var_0", "itm_b1_item_valuable"),
+    (eq, ":var_1", 0),
+    (set_result_string, "qstr_details_dragoncoin"),
+    (set_trigger_result, 16776960),
+(try_end),
+```
+这里**`(eq, ":var_1", 0),`**中的0表示额外描述的序号,0代表第一条，那么我们要写第二条就把这里改成1即可。
+那么可以这样写：
+```python
+(try_begin),
+    (eq, ":var_0", "itm_b1_item_valuable"),
+    (try_begin),
+    	(eq, ":var_1", 0),
+    	(set_result_string, "qstr_test_ly_0"),
+    	(set_trigger_result, 0x00ffff),
+    (else_try),
+    	(eq, ":var_1", 1),
+    	(set_result_string, "qstr_test_ly_1"),
+    	(set_trigger_result, 0xdaa520),
+    (else_try),
+    	(eq, ":var_1", 2),
+    	(set_result_string, "qstr_test_ly_2"),
+    	(set_trigger_result, 0xee82ee),
+    (try_end),
+(try_end),
+```
+上限貌似是8条，也就是:var_1从0~7。
+set_trigger_result后面的参数是十六进制颜色代码。
+如上所示，我添加了三条，最终效果如下：
+<br><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/intro-02.png" alt="3条额外描述" title="3条额外描述" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></figure><br>
