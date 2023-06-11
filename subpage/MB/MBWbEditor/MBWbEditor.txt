@@ -1,0 +1,68 @@
+#魔球可用触发器代码实例
+1.<a href="../../../subpage/MB/MBWbEditor/example-001.html">**超经典例：缓速箭矢**</a>
+2.<a href="../../../subpage/MB/MBWbEditor/example-001.html">**经典例：箭矢杀死无主马**</a>
+3.<a href="../../../subpage/MB/MBWbEditor/example-003.html">**超经典例：一击落马和减速一则**</a>
+
+#<a id="jump_0"></a>魔球触发器代码说明及纠错
+Q1.**[魔球有哪些触发器](#jump_1)**
+Q2.**[agent判定不严谨导致报红 以及修正](#jump_2)**
+Q3.**[AOE伤害误伤友军或盟军的问题(即队伤和盟伤问题) 两种解决方式](#jump_3)**
+
+
+***
+#####Q1.<a id="jump_1"></a>魔球有哪些触发器
+常用触发器有两个:
+武器攻击（触发器参数1：攻击方角色，位置1：武器位置）
+箭矢击中（触发器参数1：攻击方角色，位置1：箭矢落点位置）
+另外还有：
+击中盾牌（触发器参数1：防御方角色，触发器参数2：攻击方角色，触发器参数3：伤害）
+初始化物品（触发器参数1：当前角色，触发器参数2：角色兵种）
+
+给物品添加光源，或让武器拔出时冒火，都是使用 **初始化物品** 来添加
+[<img src="../../../images/quest-logo/farm.png" alt="" title="">](#jump_0)
+***
+#####Q2.<a id="jump_2"></a>agent判定不严谨导致报红 以及修正
+agent是激活有效的，agent是人类，agent是存活的，agent是盟军
+**`(agent_is_active,<agent_id>),`**
+**`(agent_is_human,<agent_id>),`**
+**`(agent_is_alive,<agent_id>),`**
+**`(agent_is_ally,<agent_id>),`**
+除了上述4条常用判定外，不要忘了在获取不到马匹的时，需额外判定-1的情况
+[<img src="../../../images/quest-logo/farm.png" alt="" title="">](#jump_0)
+***
+#####Q3.<a id="jump_3"></a>AOE伤害误伤友军或盟军的问题(即队伤和盟伤问题) 两种解决方式
+以<span style="color:#5bdaed;">缓速箭矢</span>为例
+```python
+(store_trigger_param_1,":var_0"),         #获取射手角色
+(agent_get_party_id,":var_3",":var_0"),   #获取射手所在部队
+(try_for_agents,":var_1"),
+    (agent_is_active,":var_1"),   #agent是激活有效的
+    (agent_is_human,":var_1"),    #agent是人类
+    (agent_is_alive,":var_1"),    #agent是存活的
+    (neg|agent_is_ally,":var_1"), #agent不是盟军士兵(盟伤)
+    (agent_get_position,pos2,":var_1"),  ####获取对象agent坐标
+    (get_distance_between_positions_in_meters,":var_2",pos1,pos2), #获取对象agent坐标和箭矢落点坐标之间的距离
+    (agent_get_party_id,":var_4",":var_1"),   #获取对象agent所在部队
+    (try_begin),
+        (neg|gt,":var_2",10),
+        (neg|eq,":var_3",":var_4"),   #判断对象agent所在部队不是射手所在部队(友伤)
+        (agent_get_horse,":var_5",":var_1"),  #判断对象agent的马匹
+        (try_begin),
+            (neg|eq,":var_5",-1), #没有获取到马匹时，需额外判定-1情况
+            (agent_set_horse_speed_factor,":var_1",0),
+        (else_try),
+            (agent_set_speed_limit,":var_1",0),
+        (try_end),
+    (try_end),
+(try_end),
+```
+除上述外还有一种写法
+```python
+#当:var_0表示射手 :var_1表示所有agent时
+(agent_get_team, ":user_team", ":var_0"),       #获取射手的team
+(try_for_agents,":var_1"),
+    (agent_get_team, ":enemies_team", ":var_1"),    #获取所有agent的team
+    (teams_are_enemies, ":user_team", ":enemies_team"),#判断两只队伍是否为敌人
+(try_end),
+```
+[<img src="../../../images/quest-logo/farm.png" alt="" title="">](#jump_0)

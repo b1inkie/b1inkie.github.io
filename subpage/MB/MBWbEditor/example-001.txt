@@ -1,0 +1,18 @@
+#箭矢击中触发器
+#为了处理掉没有骑手的马匹
+#可配合缓速箭矢使用
+(try_for_agents,":var_11"),
+    (1712,":var_11"),
+    (neg|1704,":var_11"),
+    (1702,":var_11"),
+    (agent_get_position,pos12,":var_11"),
+    (get_distance_between_positions_in_meters,":var_12",pos1,pos12),
+    (try_begin),
+        (neg|gt,":var_12",10), #范围
+        (1715,":var_13",":var_11"),
+        (try_begin),
+            (eq,":var_13",-1),
+            (1722,":var_0",":var_11",500), #对马匹造成的伤害值
+        (try_end),
+    (try_end),
+(try_end),

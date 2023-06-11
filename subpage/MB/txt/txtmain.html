@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>b1ink</title>
+    <link rel="stylesheet" href="../../../css/sidebar-flex.css">
+    <link rel="shortcut icon" href="../../../images/misc/onotera32x32-circle.ico"> 
+    <script src="../../../clipboard.js-master/dist/clipboard.min.js"></script>
+</head>
+
+<body>
+    <script>
+        (function () {
+            var a_idx = 0;
+            window.onclick = function (event) {
+                var a = new Array("我以前和你一样也是个冒险家，直到我的膝盖中了一箭。","Wait,I Know u","Let me guess...Someone stole your sweetroll?","Fus Ro Dah.","Some people call it junk, me, I call them treasure.","It's a fine day with you around.","Food for the hungry, and drink for the thirsty.",
+                    );
+ 
+                var heart = document.createElement("b"); //创建b元素
+                heart.onselectstart = new Function('event.returnValue=false'); //防止拖动
+ 
+                document.body.appendChild(heart).innerHTML = a[a_idx]; //将b元素添加到页面上
+                a_idx = (a_idx + 1) % a.length;
+                heart.style.cssText = "position: fixed;left:-100%;"; //给p元素设置样式
+ 
+                var f = 16, // 字体大小
+                    x = event.clientX - f / 2, // 横坐标
+                    y = event.clientY - f, // 纵坐标
+                    c = randomColor(), // 随机颜色
+                    a = 1, // 透明度
+                    s = 1.0; // 放大缩小
+ 
+                var timer = setInterval(function () { //添加定时器
+                    if (a <= 0) {
+                        document.body.removeChild(heart);
+                        clearInterval(timer);
+                    } else {
+                        heart.style.cssText = "font-size:16px;cursor: default;position: fixed;color:" +
+                            c + ";left:" + x + "px;top:" + y + "px;opacity:" + a + ";transform:scale(" +
+                            s + ");";
+ 
+                        y--;
+                        a -= 0.016;
+                        s += 0.002;
+                    }
+                }, 15)
+ 
+            }
+            // 随机颜色
+            function randomColor() {
+ 
+                return "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math
+                .random() * 255)) + ")";
+ 
+            }
+        }());
+    </script>
+    <div class="bigbox">
+        <input type="checkbox" id="checkbox"/>
+
+        <label for="checkbox">
+            <img src="../../../images/misc/tesv-logo.png" alt="sidebar-hide">
+            <span>&emsp;<i>TXT篇合集(点左侧 logo 隐藏侧边栏)</i></span>
+        </label>
+        <ul>
+            <li>
+                <img src="../../../images/misc/onotera64x64.png" alt="头像" />
+                <span>b1ink<br/><font size=1>学习使我快乐:doge:</font></span>
+            </li>
+            <!--intro-->
+            <li>
+                <a href="../../../index.html">
+                    <img src="../../../images/quest-logo/dragon-logo.png" alt="1">
+                    <span>INTRO</span>
+                </a>
+            </li>
+            <!--DST-->
+            <li>
+                <a>
+                    <img src="../../../images/quest-logo/dragon-logo.png" alt="2">
+                    <span>DST</span>
+                </a>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/DST/mycookpoot/mycookpot.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="2">
+                        <span><p style="font-family:Microsoft YaHei">写一个烹煮锅</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/DST/myfirstsword/myfirstsword.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">从0开始做一把武器</p></span>
+                    </a>
+                </b>
+            </li>
+            <!--Mount&Blade-->
+            <li>
+                <a>
+                    <img src="../../../images/quest-logo/dragon-logo.png" alt="2">
+                    <span>Mount&Blade</span>
+                </a>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/tempnote/tempnote.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">临时笔记</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/extratext/extratext.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">物品添加额外描述</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/MBWbEditor/MBWbEditor.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">魔球触发器</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="#">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">TXT篇</p></span>
+                    </a>
+                </b>
+            </li>
+        </ul>
+    </div>
+    <div class="workzone">
+
+
+    </div>
+</body>
+</html>

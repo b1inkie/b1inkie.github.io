@@ -1,0 +1,80 @@
+<a href="../../../subpage/MB/MBWbEditor/MBWbEditor.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
+#骑枪一击杀马（武器攻击触发器放骑枪上）
+```python
+(store_trigger_param_1,":var_0"),                 
+(agent_get_team, ":user_team", ":var_0"), 
+(agent_get_position,pos2,":var_0"),  
+
+(assign, ":distance_closest", 1000), #设置范围10m
+(assign, ":enemies_closest", -1), #用于存储最近的敌对单位
+(try_for_agents, ":enemies"),
+    (agent_is_alive, ":enemies"),
+    (agent_is_human, ":enemies"),
+
+    (agent_get_position, pos3, ":enemies"),
+    (agent_get_team, ":enemies_team", ":enemies"),
+    (teams_are_enemies, ":user_team", ":enemies_team"),
+
+    (get_distance_between_positions, ":distance_abs", pos2, pos3), #获取自己和敌对单位的距离
+    (lt, ":distance_abs", ":distance_closest"), #只选取设置范围内的敌人
+    (assign, ":distance_closest", ":distance_abs"),
+    (assign, ":enemies_closest", ":enemies"),
+(try_end),
+(try_begin),
+    (neq, ":enemies_closest", -1), #当:enemies_closest不为-1即有敌人时
+    (agent_get_horse,":enemies_horse",":enemies_closest"), #获取最近敌对单位的马匹
+    (try_begin),
+        (neg|eq,":enemies_horse",-1), #当获取值不为-1即有马时
+        (agent_deliver_damage_to_agent,":enemies_horse",2000), #传递伤害
+    (try_end),
+(try_end),
+```
+<div class="cp1" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">
+    <script type="text/javascript" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">new ClipboardJS('.btn1');</script>
+<textarea id="bar1" readonly="readonly" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">
+2071 1 1224979098644774912 1770 2 1224979098644774913 1224979098644774912 1710 2 2 1224979098644774912 2133 2 1224979098644774914 1000 2133 2 1224979098644774915 -1 12 1 1224979098644774916 1702 1 1224979098644774916 1704 1 1224979098644774916 1710 2 3 1224979098644774916 1770 2 1224979098644774917 1224979098644774916 1788 2 1224979098644774913 1224979098644774917 710 3 1224979098644774918 2 3 2147483678 2 1224979098644774918 1224979098644774914 2133 2 1224979098644774914 1224979098644774918 2133 2 1224979098644774915 1224979098644774916 3 0 4 0 2147483679 2 1224979098644774915 -1 1714 2 1224979098644774919 1224979098644774915 4 0 2147483679 2 1224979098644774919 -1 1722 2 1224979098644774919 2000 3 0 3 0 
+</textarea>
+<button class="btn1" data-clipboard-action="copy" data-clipboard-target="#bar1" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">
+    复制TXT代码
+</button>
+</div>
+#近战武器减速士兵 若是骑手则减速马 （武器攻击触发器 放近战武器上）
+```python
+(store_trigger_param_1,":var_0"),                 
+(agent_get_team, ":user_team", ":var_0"), 
+(agent_get_position,pos2,":var_0"),  
+
+(assign, ":distance_closest", 500), #近战范围很小，所以设5m即可
+(assign, ":enemies_closest", -1),
+(try_for_agents, ":enemies"),
+    (agent_is_alive, ":enemies"),
+    (agent_is_human, ":enemies"),
+
+    (agent_get_position, pos3, ":enemies"),
+    (agent_get_team, ":enemies_team", ":enemies"),
+    (teams_are_enemies, ":user_team", ":enemies_team"),
+    (get_distance_between_positions, ":distance_abs", pos2, pos3),
+    (lt, ":distance_abs", ":distance_closest"),
+    (assign, ":distance_closest", ":distance_abs"),
+    (assign, ":enemies_closest", ":enemies"),
+(try_end),
+(try_begin),
+    (neq, ":enemies_closest", -1),
+    (agent_get_horse,":enemies_horse",":enemies_closest"),
+    (try_begin),
+        (neg|eq,":enemies_horse",-1),
+        (agent_set_horse_speed_factor, ":enemies_horse", 0),
+    (else_try),
+        (agent_set_speed_limit,":enemies_closest",0),
+    (try_end),
+(try_end),
+```
+<div class="cp2" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">
+    <script type="text/javascript" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">new ClipboardJS('.btn2');</script>
+<textarea id="bar2" readonly="readonly" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">
+    2071 1 1224979098644774912 1770 2 1224979098644774913 1224979098644774912 1710 2 2 1224979098644774912 2133 2 1224979098644774914 500 2133 2 1224979098644774915 -1 12 1 1224979098644774916 1702 1 1224979098644774916 1704 1 1224979098644774916 1710 2 3 1224979098644774916 1770 2 1224979098644774917 1224979098644774916 1788 2 1224979098644774913 1224979098644774917 710 3 1224979098644774918 2 3 2147483678 2 1224979098644774918 1224979098644774914 2133 2 1224979098644774914 1224979098644774918 2133 2 1224979098644774915 1224979098644774916 3 0 4 0 2147483679 2 1224979098644774915 -1 1714 2 1224979098644774919 1224979098644774915 4 0 2147483679 2 1224979098644774919 -1 1734 2 1224979098644774919 0 5 0 1736 2 1224979098644774915 0 3 0 3 0 
+</textarea>
+<button class="btn2" data-clipboard-action="copy" data-clipboard-target="#bar2" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">
+    复制TXT代码
+</button>
+</div>

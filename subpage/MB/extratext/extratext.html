@@ -123,6 +123,22 @@
                     </a>
                 </b>
             </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/MBWbEditor/MBWbEditor.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">魔球触发器</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/txt/txtmain.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">TXT篇</p></span>
+                    </a>
+                </b>
+            </li>
         </ul>
     </div>
     <div class="workzone">
@@ -146,7 +162,11 @@
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">十进制颜色（网上都是）：<br><br></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/colors.png" alt="十进制颜色" title="十进制颜色" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">十进制颜色</figcaption></figure></figure><br><p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"></p>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">最终我的代码便是：<br>4 0 31 2 1224979098644774912 <span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #5bdaed;">288230376151713593</span> 31 2 1224979098644774913 0 60 1 <span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #5bdaed;">1585267068834418149</span> 2075 1 <span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #ffd700;">16776960</span> 3 0 </p>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">完事。</p>
-<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"><strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;"><span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #dc143c;">写完之后我发现了一个问题，我这边的描述总是显示我添加的上一行描述，原因暂不清楚。不知道大家有没有问题。解决方式倒是很简单：就在quick_string下面再添加一条废的描述，把你的英文描述的纯数字ID+1即可。</span></strong></p>
+<hr style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; height: 1px; margin: 1.5rem 0px; border-right: none; border-bottom: none; border-left: none; border-image: initial; border-top: 1px dashed rgb(165, 165, 165);">
+<h2 id="h2" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1.4em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">重要问题2则</span></h2>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">1.<strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;"><span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #dc143c;">写完之后我发现了一个问题，我这边的描述总是显示我添加的上一行描述，原因暂不清楚。不知道大家有没有问题。解决方式倒是很简单：就在quick_string下面再添加一条废的描述，把你的英文描述的纯数字ID+1即可。 例如 可以在最后一行加一句 qstr_end_all END. 无需汉化，让这一行始终为最后一行。以后都在这一行上面添加即可。</span></strong><br>2.<strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;"><span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #dc143c;">还有一个<span style="line-height: inherit; margin: 0px; padding: 0px; color: #00ffff; font-size: 25px;">究极重要</span>的问题，是群友在操作过程中出现并反馈给我的:
+群友发现quick_string文件在编辑之后，进游戏所有字符串都报红读不出来了。最终可以确定是编码问题，系统自带的记事本默认ASCII，应改成UTF8，其实还是建议大家不要再用记事本改了。 在这里推荐一下sublime。</span></strong></p>
+<hr style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; height: 1px; margin: 1.5rem 0px; border-right: none; border-bottom: none; border-left: none; border-image: initial; border-top: 1px dashed rgb(165, 165, 165);">
 <h4 id="h-2" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1.2em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">那么怎么添加多个描述呢</span></h4>
 <h5 id="hpy" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">先给出上述代码的py版：</span></h5>
 <pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="python language-python hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 18px; font-size: 14px; font-weight: normal; word-spacing: 0px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; color: rgb(169, 183, 198); background: rgb(40, 43, 46); overflow-x: auto; padding: 0.5em; white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;">(try_begin),<br>&nbsp;&nbsp;&nbsp;&nbsp;(eq,&nbsp;<span class="hljs-string" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(238, 220, 112); word-wrap: inherit !important; word-break: inherit !important;">":var_0"</span>,&nbsp;<span class="hljs-string" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(238, 220, 112); word-wrap: inherit !important; word-break: inherit !important;">"itm_b1_item_valuable"</span>),<br>&nbsp;&nbsp;&nbsp;&nbsp;(eq,&nbsp;<span class="hljs-string" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(238, 220, 112); word-wrap: inherit !important; word-break: inherit !important;">":var_1"</span>,&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>),<br>&nbsp;&nbsp;&nbsp;&nbsp;(set_result_string,&nbsp;<span class="hljs-string" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(238, 220, 112); word-wrap: inherit !important; word-break: inherit !important;">"qstr_details_dragoncoin"</span>),<br>&nbsp;&nbsp;&nbsp;&nbsp;(set_trigger_result,&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">16776960</span>),<br>(try_end),<br></code></pre>
