@@ -1,0 +1,94 @@
+﻿<a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
+#conversation.txt修改终极版教程 含 可简单套用的模板
+#####打开conversation文件后引入眼帘的是这样的一堆乱七八糟的数字（为了阅读和修改更舒服，可以把语法设置成<span style="color:#800080;">Go</span>）：
+```python
+dialogsfile version 2
+4835
+dlga_start:member_talk 4095 0 …
+dlga_start:close_window 4095 0 …
+dlga_start:close_window.1 4095 0  …
+dlga_prisoner_chat:lady_prisoner_chat_2 69631 14 … 
+…
+…
+```
+第一行可以略过，第二行是台词的数量，以后每加一句，这里就要加1；或者你拉到最后一行，将总行数减去2也行，这样你就必须确保没有空的行。
+
+我们来看结构，我们将台词分为玩家台词（或称为选择支）和NPC台词。
+<figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="../tempnote/images/frame-intro-01.png" alt="对话窗口" title="对话窗口" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></figure>
+如图所示蓝框部分为NPC台词窗格，红框部分为选择支窗格.
+·NPC的台词窗格 结构：
+**`dlga_xxx:xxx <1-代表这是一句NPC的台词的代号> <2-NPC台词窗格的代号> <3-触发条件代码的行数> <4-触发条件的代码> <5-NPC台词_下划线表示空格> <6-链接玩家台词，即选择支窗格的代号> <7-触发结果代码的行数> <8-触发结果的代码> NO_VOICEOVER`**
+·选择支窗格(玩家的台词窗格) 结构：
+**`dlga_xxx:xxx <1-代表这是一句玩家的台词的代号> <2-选择支窗格的代号> <3-触发条件代码的行数> <4-触发条件的代码> <5-玩家台词_下划线表示空格> <6-跳转到NPC回复台词的窗格代号> <7-触发结果代码的行数> <8-触发结果的代码> NO_VOICEOVER`**
+<span style="color:#ff0000;">※</span>右上角蓝框部分代表NPC台词窗格，如果你想要这一句话是**NPC说的**，那么第一个参数就要填<span style="color:#5bdaed;">4095</span>，而第二个参数则特指“什么事，队长大人”这句话，参数3，4，5已写的很清楚了。我们再看，只有白框和蓝框NPC的台词窗格，整个画面是不完整的，<span style="color:#ff0000;">所以第6个参数一定要链接玩家的台词</span>，也就是选择支窗格代号。
+<span style="color:#ff0000;">※</span>下面红框部分代表玩家台词窗格，即选择支窗格，如果你想要这一句话是**玩家说的**，那么第一个参数就要填<span style="color:#5bdaed;">69631</span>,<span style="color:#5bdaed;">第二个参数则特指这整个红框内所有选择支所在的窗格代号</span>，<span style="color:#dc143c;">也就是说这每一句选择支的第二个参数都是一样的</span>，那么怎么表示顺序呢，<span style="color:#ff8c00;">撰写顺序就是显示顺序！</span>参数3，4，5依旧略过。我们点选了一个选择支后，谈话对象要回复我们一句话，所以，<span style="color:blue;">第6个参数一定要跳转到NPC的台词窗格代号</span>。当然你也可以选择直接跳转到 关闭窗口 来结束对话。
+>**<span style="color:#87ceeb;">那么<span style="color:red;">69631</span>和<span style="color:red;">4095</span>这两个数字每个MOD不一样，我又如何找到呢？很简单我们看一下汉化文件，找一句NPC台词再找一句玩家台词，复制台词的dlga_xxx:xxx前缀到conversation中搜一下就可以了！</span>**
+
+##提供一个可以简单套用的模版
+先描述一下模板的具体功能：
+<span style="color:blue;">在与某NPC对话中的选择支窗格中的任意一句</span>的下面添加一句始终显示的选择支：“你能帮我实现什么功能？”，点选后出来一列可供选择的选择支、并且后续可以自由添加新选择支。每一个选择支实现对应的功能，并且有返回选择支（不写返回，对话就会卡住）。
+
+**写之前我们要找到在哪一个选择支窗格中的哪一句下面添加？**
+举个例子，我们要在酒馆老板的“我 想 给 今 晚 每 个 到 这 里 来 的 人 买 一 杯 你 这 里 最 好 的 酒 。 ”的下面添加，我们首先打开汉化文件\languages\cns\dialogs.csv，搜索这句中文。将dlga_xxx:xxx复制一下到conversation中定位：
+**`dlga_tavernkeeper_talk:tavernkeeper_buy_drinks 69631 1151`**
+可以看到该选择支窗格的编号为1151，我们这下面添加新的选择支就会显示在它下面，如果在conversation文档最下面添加，那么我们添加的那句话就会在窗格的最下面。
+```Go
+dlga_1_menu_ex:ask_for_sth 69631 1151 0 What_can_u_do_for_me? 12138 0 NO_VOICEOVER
+```
+触发条件不写，这句话就会始终出现在用这个1151对话窗格的所有NPC上，那么我们怎么让我们添加的选择支放到指定NPC上呢？
+很简单，触发条件一句即可：
+**`(eq,"$g_talk_troop",<NPC的troop_id>)`**
+因为是一行代码，所以将 触发条件行数 改成1 后面加上这一句的TXT代码即可。
+
+后面的12138是我自己乱起的编号，只要与MOD里的编号不冲突即可，可以ctrl+F搜索 空格12138空格 来确认是否冲突。
+
+我们写完剩余部分：
+```Go
+dlga_1_menu_ex:ask_for_sth 69631 1151 0 What_can_u_do_for_me? 12138 0 NO_VOICEOVER
+dlga_2_menu_ex:tavernkeeper_reply_1_menu 4095 12138 0 What_do_u_need? 12139 0 NO_VOICEOVER
+
+dlga_2_menu_ex:list_a 69631 12139 <触发条件行数> <触发条件代码> function_a. 12140 <触发结果行数> <触发结果代码> NO_VOICEOVER
+dlga_2_menu_ex:list_b 69631 12139 <触发条件行数> <触发条件代码> function_b. 12140 <触发结果行数> <触发结果代码> NO_VOICEOVER
+dlga_2_menu_ex:list_c 69631 12139 <触发条件行数> <触发条件代码> function_c. 12140 <触发结果行数> <触发结果代码> NO_VOICEOVER
+dlga_2_menu_ex:list_d 69631 12139 <触发条件行数> <触发条件代码> function_d. 12140 <触发结果行数> <触发结果代码> NO_VOICEOVER
+dlga_2_menu_ex:list_e 69631 12139 <触发条件行数> <触发条件代码> function_e. 12140 <触发结果行数> <触发结果代码> NO_VOICEOVER
+dlga_2_menu_ex:list_f 69631 12139 <触发条件行数> <触发条件代码> function_f. 12140 <触发结果行数> <触发结果代码> NO_VOICEOVER
+dlga_2_menu_ex:list_g 69631 12139 <触发条件行数> <触发条件代码> function_g. 12140 <触发结果行数> <触发结果代码> NO_VOICEOVER
+
+dlga_2_menu_ex:list_cancel 69631 12139 0 Never_mind. 12140 0 NO_VOICEOVER
+dlga_1_menu_ex:tavernkeeper_pretalk 4095 12140 0 Never_mind. 1151 0 NO_VOICEOVER
+```
+汉化：
+```Go
+dlga_1_menu_ex:ask_for_sth|你 能 帮 我 做 点 事 吗 ？
+dlga_2_menu_ex:tavernkeeper_reply_1_menu|你 想 让 我 做 什 么 ？
+
+dlga_2_menu_ex:list_a|事 情 a
+dlga_2_menu_ex:list_b|事 情 b
+dlga_2_menu_ex:list_c|事 情 c
+dlga_2_menu_ex:list_d|事 情 d
+dlga_2_menu_ex:list_e|事 情 e
+dlga_2_menu_ex:list_f|事 情 f
+dlga_2_menu_ex:list_g|事 情 g
+
+dlga_2_menu_ex:list_cancel|想 想 还 是 算 了 。
+dlga_1_menu_ex:tavernkeeper_pretalk|你 还 有 什 么 事 情 吗 ？
+```
+以上便是一个最简单的，可以自由拓展选择支的模板了，上下两句不要动，在中间去添加新的选择支即可。
+当然这个模板有一个问题，当我们不满足触发条件的时候，“事 情” 就不会出现在列表里，毕竟这是一个简单模板嘛。
+
+*举个例子，我想做个合成系统，当玩家背包有指定的几样物品时，就可以在这个界面对话合成，但是如果没有指定的物品，那么“事 情 a”、“事 情 b”…这些就压根不会出现。也就是说，玩家必须事先查攻略得到配方。* <span style="color:#90ee90;">当然，你也可以在NPC回复的台词中，写上选择支出现的条件，毕竟有那么大的一个框子(笑</span>
+
+<span style="color:red;">最后写完了，记得删掉空行和修改conversation第二行的数字！</span>
+
+
+
+
+
+
+
+
+
+
+
+<a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>

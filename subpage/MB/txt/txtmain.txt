@@ -1,2 +1,4 @@
 ﻿#TXT合集(修改及教程)
+#####*<span style="color:#dc143c;">红色</span>为纯教程篇*
 1.<a href="../../../subpage/MB/txt/ex-001.html">**添加一把对指定阵营士兵造成多倍伤害的武器**</a>
+2.<a href="../../../subpage/MB/txt/ex-002.html">**<span style="color:#dc143c;font-size:20px;">conversation.txt修改终极版教程</span>及新手也可简单套用的模板</span>**</a>

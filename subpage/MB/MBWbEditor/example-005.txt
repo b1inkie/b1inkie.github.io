@@ -26,4 +26,15 @@
     (try_end),
 (try_end),
 ```
+共19行
+<div class="cp1" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">
+    <script type="text/javascript" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">new ClipboardJS('.btn1');</script>
+<textarea id="bar1" readonly="readonly" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">
+2071 1 1224979098644774912 6 3 1224979098644774913 0 4 1804 3 1224979098644774914 1224979098644774912 1224979098644774913 1570 2 1224979098644774915 1224979098644774914 4 0 31 2 1224979098644774915 5 1825 3 1224979098644774916 1224979098644774912 1224979098644774913 2136 3 1224979098644774917 1 100 4 0 33 3 1224979098644774917 1 5 2105 2 1224979098644774916 2 1776 3 1224979098644774912 1224979098644774914 1224979098644774916 5 0 33 3 1224979098644774917 6 25 2105 2 1224979098644774916 1 1776 3 1224979098644774912 1224979098644774914 1224979098644774916 3 0 3 0 3 0 
+</textarea>
+<button class="btn1" data-clipboard-action="copy" data-clipboard-target="#bar1" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">
+    复制TXT代码
+</button>
+</div>
+
 <a href="../../../subpage/MB/MBWbEditor/MBWbEditor.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>

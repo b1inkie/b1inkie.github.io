@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>b1ink</title>
+    <link rel="stylesheet" href="../../../css/sidebar-flex.css">
+    <link rel="shortcut icon" href="../../../images/misc/onotera32x32-circle.ico"> 
+    <script src="../../../clipboard.js-master/dist/clipboard.min.js"></script>
+</head>
+
+<body>
+    <script>
+        (function () {
+            var a_idx = 0;
+            window.onclick = function (event) {
+                var a = new Array("我以前和你一样也是个冒险家，直到我的膝盖中了一箭。","Wait,I Know u","Let me guess...Someone stole your sweetroll?","Fus Ro Dah.","Some people call it junk, me, I call them treasure.","It's a fine day with you around.","Food for the hungry, and drink for the thirsty.",
+                    );
+ 
+                var heart = document.createElement("b"); //创建b元素
+                heart.onselectstart = new Function('event.returnValue=false'); //防止拖动
+ 
+                document.body.appendChild(heart).innerHTML = a[a_idx]; //将b元素添加到页面上
+                a_idx = (a_idx + 1) % a.length;
+                heart.style.cssText = "position: fixed;left:-100%;"; //给p元素设置样式
+ 
+                var f = 16, // 字体大小
+                    x = event.clientX - f / 2, // 横坐标
+                    y = event.clientY - f, // 纵坐标
+                    c = randomColor(), // 随机颜色
+                    a = 1, // 透明度
+                    s = 1.0; // 放大缩小
+ 
+                var timer = setInterval(function () { //添加定时器
+                    if (a <= 0) {
+                        document.body.removeChild(heart);
+                        clearInterval(timer);
+                    } else {
+                        heart.style.cssText = "font-size:16px;cursor: default;position: fixed;color:" +
+                            c + ";left:" + x + "px;top:" + y + "px;opacity:" + a + ";transform:scale(" +
+                            s + ");";
+ 
+                        y--;
+                        a -= 0.016;
+                        s += 0.002;
+                    }
+                }, 15)
+ 
+            }
+            // 随机颜色
+            function randomColor() {
+ 
+                return "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math
+                .random() * 255)) + ")";
+ 
+            }
+        }());
+    </script>
+    <div class="bigbox">
+        <input type="checkbox" id="checkbox"/>
+
+        <label for="checkbox">
+            <img src="../../../images/misc/tesv-logo.png" alt="sidebar-hide">
+            <span>&emsp;<i>TXT篇合集(点左侧 logo 隐藏侧边栏)</i></span>
+        </label>
+        <ul>
+            <li>
+                <img src="../../../images/misc/onotera64x64.png" alt="头像" />
+                <span>b1ink<br/><font size=1>学习使我快乐:doge:</font></span>
+            </li>
+            <!--intro-->
+            <li>
+                <a href="../../../index.html">
+                    <img src="../../../images/quest-logo/dragon-logo.png" alt="1">
+                    <span>INTRO</span>
+                </a>
+            </li>
+            <!--DST-->
+            <li>
+                <a>
+                    <img src="../../../images/quest-logo/dragon-logo.png" alt="2">
+                    <span>DST</span>
+                </a>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/DST/mycookpoot/mycookpot.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="2">
+                        <span><p style="font-family:Microsoft YaHei">写一个烹煮锅</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/DST/myfirstsword/myfirstsword.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">从0开始做一把武器</p></span>
+                    </a>
+                </b>
+            </li>
+            <!--Mount&Blade-->
+            <li>
+                <a>
+                    <img src="../../../images/quest-logo/dragon-logo.png" alt="2">
+                    <span>Mount&Blade</span>
+                </a>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/tempnote/tempnote.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">临时笔记</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/extratext/extratext.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">物品添加额外描述</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/MBWbEditor/MBWbEditor.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">魔球触发器</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/txt/txtmain.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">TXT篇</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/others/others.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">杂项</p></span>
+                    </a>
+                </b>
+            </li>
+        </ul>
+    </div>
+    <div class="workzone">
+        <div class="output_wrapper" id="output_wrapper_id" style="font-size: 16px; color: rgb(62, 62, 62); line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;"><p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"><a href="../../../subpage/MB/txt/txtmain.html" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: rgb(30, 107, 184); overflow-wrap: break-word;"></a></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><a href="../../../subpage/MB/txt/txtmain.html" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: rgb(30, 107, 184); overflow-wrap: break-word;"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">返回</figcaption></a></figure><p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"></p>
+<h1 id="hconversationtxt" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1.6em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">conversation.txt修改终极版教程 含 可简单套用的模板</span></h1>
+<h5 id="hconversationspanstylecolor800080gospan" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">打开conversation文件后引入眼帘的是这样的一堆乱七八糟的数字（为了阅读和修改更舒服，可以把语法设置成<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #800080;">Go</span>）：</span></h5>
+<pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="python language-python hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 18px; font-size: 14px; font-weight: normal; word-spacing: 0px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; color: rgb(169, 183, 198); background: rgb(40, 43, 46); overflow-x: auto; padding: 0.5em; white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;">dialogsfile&nbsp;version&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">2</span><br><span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">4835</span><br>dlga_start:member_talk&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">4095</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;…<br>dlga_start:close_window&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">4095</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;…<br>dlga_start:close_window<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">.1</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">4095</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;&nbsp;…<br>dlga_prisoner_chat:lady_prisoner_chat_2&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">69631</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">14</span>&nbsp;…&nbsp;<br>…<br>…<br></code></pre>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">第一行可以略过，第二行是台词的数量，以后每加一句，这里就要加1；或者你拉到最后一行，将总行数减去2也行，这样你就必须确保没有空的行。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">我们来看结构，我们将台词分为玩家台词（或称为选择支）和NPC台词。</p>
+<figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="../tempnote/images/frame-intro-01.png" alt="对话窗口" title="对话窗口" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">对话窗口</figcaption></figure></figure>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">如图所示蓝框部分为NPC台词窗格，红框部分为选择支窗格.<br>·NPC的台词窗格 结构：<br><strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;"><code style="font-size: inherit; line-height: inherit; overflow-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0px 2px; color: rgb(233, 105, 0); background: rgb(248, 248, 248);">dlga_xxx:xxx &lt;1-代表这是一句NPC的台词的代号&gt; &lt;2-NPC台词窗格的代号&gt; &lt;3-触发条件代码的行数&gt; &lt;4-触发条件的代码&gt; &lt;5-NPC台词_下划线表示空格&gt; &lt;6-链接玩家台词，即选择支窗格的代号&gt; &lt;7-触发结果代码的行数&gt; &lt;8-触发结果的代码&gt; NO_VOICEOVER</code></strong><br>·选择支窗格(玩家的台词窗格) 结构：<br><strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;"><code style="font-size: inherit; line-height: inherit; overflow-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0px 2px; color: rgb(233, 105, 0); background: rgb(248, 248, 248);">dlga_xxx:xxx &lt;1-代表这是一句玩家的台词的代号&gt; &lt;2-选择支窗格的代号&gt; &lt;3-触发条件代码的行数&gt; &lt;4-触发条件的代码&gt; &lt;5-玩家台词_下划线表示空格&gt; &lt;6-跳转到NPC回复台词的窗格代号&gt; &lt;7-触发结果代码的行数&gt; &lt;8-触发结果的代码&gt; NO_VOICEOVER</code></strong><br><span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #ff0000;">※</span>右上角蓝框部分代表NPC台词窗格，如果你想要这一句话是<strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;">NPC说的</strong>，那么第一个参数就要填<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #5bdaed;">4095</span>，而第二个参数则特指“什么事，队长大人”这句话，参数3，4，5已写的很清楚了。我们再看，只有白框和蓝框NPC的台词窗格，整个画面是不完整的，<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #ff0000;">所以第6个参数一定要链接玩家的台词</span>，也就是选择支窗格代号。<br><span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #ff0000;">※</span>下面红框部分代表玩家台词窗格，即选择支窗格，如果你想要这一句话是<strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;">玩家说的</strong>，那么第一个参数就要填<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #5bdaed;">69631</span>,<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #5bdaed;">第二个参数则特指这整个红框内所有选择支所在的窗格代号</span>，<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #dc143c;">也就是说这每一句选择支的第二个参数都是一样的</span>，那么怎么表示顺序呢，<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #ff8c00;">撰写顺序就是显示顺序！</span>参数3，4，5依旧略过。我们点选了一个选择支后，谈话对象要回复我们一句话，所以，<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: blue;">第6个参数一定要跳转到NPC的台词窗格代号</span>。当然你也可以选择直接跳转到 关闭窗口 来结束对话。</p>
+<blockquote style="line-height: inherit; display: block; padding: 15px 15px 15px 1rem; font-size: 0.9em; margin: 1em 0px; color: rgb(129, 145, 152); border-left: 6px solid rgb(220, 230, 240); background: rgb(242, 247, 251); overflow: auto; overflow-wrap: normal; word-break: normal;">
+  <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0px;"><strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;"><span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #87ceeb;">那么<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: red;">69631</span>和<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: red;">4095</span>这两个数字每个MOD不一样，我又如何找到呢？很简单我们看一下汉化文件，找一句NPC台词再找一句玩家台词，复制台词的dlga_xxx:xxx前缀到conversation中搜一下就可以了！</span></strong></p>
+</blockquote>
+<h2 id="h" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1.4em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">提供一个可以简单套用的模版</span></h2>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">先描述一下模板的具体功能：<br><span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: blue;">在与某NPC对话中的选择支窗格中的任意一句</span>的下面添加一句始终显示的选择支：“你能帮我实现什么功能？”，点选后出来一列可供选择的选择支、并且后续可以自由添加新选择支。每一个选择支实现对应的功能，并且有返回选择支（不写返回，对话就会卡住）。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"><strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;">写之前我们要找到在哪一个选择支窗格中的哪一句下面添加？</strong><br>举个例子，我们要在酒馆老板的“我 想 给 今 晚 每 个 到 这 里 来 的 人 买 一 杯 你 这 里 最 好 的 酒 。 ”的下面添加，我们首先打开汉化文件\languages\cns\dialogs.csv，搜索这句中文。将dlga_xxx:xxx复制一下到conversation中定位：<br><strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;"><code style="font-size: inherit; line-height: inherit; overflow-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0px 2px; color: rgb(233, 105, 0); background: rgb(248, 248, 248);">dlga_tavernkeeper_talk:tavernkeeper_buy_drinks 69631 1151</code></strong><br>可以看到该选择支窗格的编号为1151，我们这下面添加新的选择支就会显示在它下面，如果在conversation文档最下面添加，那么我们添加的那句话就会在窗格的最下面。</p>
+<pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="Go language-Go hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 18px; font-size: 14px; font-weight: normal; word-spacing: 0px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; color: rgb(169, 183, 198); background: rgb(40, 43, 46); overflow-x: auto; padding: 0.5em; white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;">dlga_1_menu_ex:ask_for_sth&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">69631</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">1151</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;What_can_u_do_for_me?&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12138</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;NO_VOICEOVER<br></code></pre>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">触发条件不写，这句话就会始终出现在用这个1151对话窗格的所有NPC上，那么我们怎么让我们添加的选择支放到指定NPC上呢？<br>很简单，触发条件一句即可：<br><strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;"><code style="font-size: inherit; line-height: inherit; overflow-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0px 2px; color: rgb(233, 105, 0); background: rgb(248, 248, 248);">(eq,"$g_talk_troop",&lt;NPC的troop_id&gt;)</code></strong><br>因为是一行代码，所以将 触发条件行数 改成1 后面加上这一句的TXT代码即可。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">后面的12138是我自己乱起的编号，只要与MOD里的编号不冲突即可，可以ctrl+F搜索 空格12138空格 来确认是否冲突。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">我们写完剩余部分：</p>
+<pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="Go language-Go hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 18px; font-size: 14px; font-weight: normal; word-spacing: 0px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; color: rgb(169, 183, 198); background: rgb(40, 43, 46); overflow-x: auto; padding: 0.5em; white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;">dlga_1_menu_ex:ask_for_sth&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">69631</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">1151</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;What_can_u_do_for_me?&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12138</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;NO_VOICEOVER<br>dlga_2_menu_ex:tavernkeeper_reply_1_menu&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">4095</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12138</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;What_do_u_need?&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12139</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;NO_VOICEOVER<br><br>dlga_2_menu_ex:list_a&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">69631</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12139</span>&nbsp;&lt;触发条件行数&gt;&nbsp;&lt;触发条件代码&gt;&nbsp;function_a.&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12140</span>&nbsp;&lt;触发结果行数&gt;&nbsp;&lt;触发结果代码&gt;&nbsp;NO_VOICEOVER<br>dlga_2_menu_ex:list_b&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">69631</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12139</span>&nbsp;&lt;触发条件行数&gt;&nbsp;&lt;触发条件代码&gt;&nbsp;function_b.&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12140</span>&nbsp;&lt;触发结果行数&gt;&nbsp;&lt;触发结果代码&gt;&nbsp;NO_VOICEOVER<br>dlga_2_menu_ex:list_c&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">69631</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12139</span>&nbsp;&lt;触发条件行数&gt;&nbsp;&lt;触发条件代码&gt;&nbsp;function_c.&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12140</span>&nbsp;&lt;触发结果行数&gt;&nbsp;&lt;触发结果代码&gt;&nbsp;NO_VOICEOVER<br>dlga_2_menu_ex:list_d&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">69631</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12139</span>&nbsp;&lt;触发条件行数&gt;&nbsp;&lt;触发条件代码&gt;&nbsp;function_d.&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12140</span>&nbsp;&lt;触发结果行数&gt;&nbsp;&lt;触发结果代码&gt;&nbsp;NO_VOICEOVER<br>dlga_2_menu_ex:list_e&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">69631</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12139</span>&nbsp;&lt;触发条件行数&gt;&nbsp;&lt;触发条件代码&gt;&nbsp;function_e.&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12140</span>&nbsp;&lt;触发结果行数&gt;&nbsp;&lt;触发结果代码&gt;&nbsp;NO_VOICEOVER<br>dlga_2_menu_ex:list_f&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">69631</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12139</span>&nbsp;&lt;触发条件行数&gt;&nbsp;&lt;触发条件代码&gt;&nbsp;function_f.&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12140</span>&nbsp;&lt;触发结果行数&gt;&nbsp;&lt;触发结果代码&gt;&nbsp;NO_VOICEOVER<br>dlga_2_menu_ex:list_g&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">69631</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12139</span>&nbsp;&lt;触发条件行数&gt;&nbsp;&lt;触发条件代码&gt;&nbsp;function_g.&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12140</span>&nbsp;&lt;触发结果行数&gt;&nbsp;&lt;触发结果代码&gt;&nbsp;NO_VOICEOVER<br><br>dlga_2_menu_ex:list_cancel&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">69631</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12139</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;Never_mind.&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12140</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;NO_VOICEOVER<br>dlga_1_menu_ex:tavernkeeper_pretalk&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">4095</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">12140</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;Never_mind.&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">1151</span>&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(174, 135, 250); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;NO_VOICEOVER<br></code></pre>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">汉化：</p>
+<pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="Go language-Go hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 18px; font-size: 14px; font-weight: normal; word-spacing: 0px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; color: rgb(169, 183, 198); background: rgb(40, 43, 46); overflow-x: auto; padding: 0.5em; white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;">dlga_1_menu_ex:ask_for_sth|你&nbsp;能&nbsp;帮&nbsp;我&nbsp;做&nbsp;点&nbsp;事&nbsp;吗&nbsp;？<br>dlga_2_menu_ex:tavernkeeper_reply_1_menu|你&nbsp;想&nbsp;让&nbsp;我&nbsp;做&nbsp;什&nbsp;么&nbsp;？<br><br>dlga_2_menu_ex:list_a|事&nbsp;情&nbsp;a<br>dlga_2_menu_ex:list_b|事&nbsp;情&nbsp;b<br>dlga_2_menu_ex:list_c|事&nbsp;情&nbsp;c<br>dlga_2_menu_ex:list_d|事&nbsp;情&nbsp;d<br>dlga_2_menu_ex:list_e|事&nbsp;情&nbsp;e<br>dlga_2_menu_ex:list_f|事&nbsp;情&nbsp;f<br>dlga_2_menu_ex:list_g|事&nbsp;情&nbsp;g<br><br>dlga_2_menu_ex:list_cancel|想&nbsp;想&nbsp;还&nbsp;是&nbsp;算&nbsp;了&nbsp;。<br>dlga_1_menu_ex:tavernkeeper_pretalk|你&nbsp;还&nbsp;有&nbsp;什&nbsp;么&nbsp;事&nbsp;情&nbsp;吗&nbsp;？<br></code></pre>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">以上便是一个最简单的，可以自由拓展选择支的模板了，上下两句不要动，在中间去添加新的选择支即可。<br>当然这个模板有一个问题，当我们不满足触发条件的时候，“事 情” 就不会出现在列表里，毕竟这是一个简单模板嘛。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"><em style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-style: italic;">举个例子，我想做个合成系统，当玩家背包有指定的几样物品时，就可以在这个界面对话合成，但是如果没有指定的物品，那么“事 情 a”、“事 情 b”…这些就压根不会出现。也就是说，玩家必须事先查攻略得到配方。</em> <span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #90ee90;">当然，你也可以在NPC回复的台词中，写上选择支出现的条件，毕竟有那么大的一个框子(笑</span></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"><span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: red;">最后写完了，记得删掉空行和修改conversation第二行的数字！</span></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"><a href="../../../subpage/MB/txt/txtmain.html" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: rgb(30, 107, 184); overflow-wrap: break-word;"></a></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><a href="../../../subpage/MB/txt/txtmain.html" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: rgb(30, 107, 184); overflow-wrap: break-word;"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">返回</figcaption></a></figure><p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"></p></div>
+
+    </div>
+</body>
+</html>
