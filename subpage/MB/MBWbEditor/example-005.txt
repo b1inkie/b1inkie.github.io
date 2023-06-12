@@ -1,6 +1,6 @@
 <a href="../../../subpage/MB/MBWbEditor/MBWbEditor.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
 #箭矢击中触发器，概率回复箭矢
-##50%几率不回复，40%几率回复1发，10%几率回复2发。
+##20%几率回复1发，5%几率回复2发，75%几率不回复。
 ```python
 (store_trigger_param_1, ":user"),
 (try_for_range, ":item_carry", 0, 4),
@@ -14,12 +14,12 @@
         
         (store_random_in_range,":random_no",1,100),
         (try_begin),
-            (is_between,":random_no",1,10),
+            (is_between,":random_no",1,5),
             (val_add,":current_ammo",2),
             (agent_set_ammo, ":user", ":weapon_equipped", ":current_ammo"),
             #(agent_set_ammo,<agent_id>,<item_id>,<value>), 
         (else_try),
-            (is_between,":random_no",10,50),
+            (is_between,":random_no",6,25),
             (val_add,":current_ammo",1),
             (agent_set_ammo, ":user", ":weapon_equipped", ":current_ammo"),
         (try_end),
