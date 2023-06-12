@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>b1ink</title>
+    <link rel="stylesheet" href="../../../css/sidebar-flex.css">
+    <link rel="shortcut icon" href="../../../images/misc/onotera32x32-circle.ico"> 
+    <script src="../../../clipboard.js-master/dist/clipboard.min.js"></script>
+</head>
+
+<body>
+    <script>
+        (function () {
+            var a_idx = 0;
+            window.onclick = function (event) {
+                var a = new Array("我以前和你一样也是个冒险家，直到我的膝盖中了一箭。","Wait,I Know u","Let me guess...Someone stole your sweetroll?","Fus Ro Dah.","Some people call it junk, me, I call them treasure.","It's a fine day with you around.","Food for the hungry, and drink for the thirsty.",
+                    );
+ 
+                var heart = document.createElement("b"); //创建b元素
+                heart.onselectstart = new Function('event.returnValue=false'); //防止拖动
+ 
+                document.body.appendChild(heart).innerHTML = a[a_idx]; //将b元素添加到页面上
+                a_idx = (a_idx + 1) % a.length;
+                heart.style.cssText = "position: fixed;left:-100%;"; //给p元素设置样式
+ 
+                var f = 16, // 字体大小
+                    x = event.clientX - f / 2, // 横坐标
+                    y = event.clientY - f, // 纵坐标
+                    c = randomColor(), // 随机颜色
+                    a = 1, // 透明度
+                    s = 1.0; // 放大缩小
+ 
+                var timer = setInterval(function () { //添加定时器
+                    if (a <= 0) {
+                        document.body.removeChild(heart);
+                        clearInterval(timer);
+                    } else {
+                        heart.style.cssText = "font-size:16px;cursor: default;position: fixed;color:" +
+                            c + ";left:" + x + "px;top:" + y + "px;opacity:" + a + ";transform:scale(" +
+                            s + ");";
+ 
+                        y--;
+                        a -= 0.016;
+                        s += 0.002;
+                    }
+                }, 15)
+ 
+            }
+            // 随机颜色
+            function randomColor() {
+ 
+                return "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math
+                .random() * 255)) + ")";
+ 
+            }
+        }());
+    </script>
+    <div class="bigbox">
+        <input type="checkbox" id="checkbox"/>
+
+        <label for="checkbox">
+            <img src="../../../images/misc/tesv-logo.png" alt="sidebar-hide">
+            <span>&emsp;<i>杂项(点左侧 logo 隐藏侧边栏)</i></span>
+        </label>
+        <ul>
+            <li>
+                <img src="../../../images/misc/onotera64x64.png" alt="头像" />
+                <span>b1ink<br/><font size=1>学习使我快乐:doge:</font></span>
+            </li>
+            <!--intro-->
+            <li>
+                <a href="../../../index.html">
+                    <img src="../../../images/quest-logo/dragon-logo.png" alt="1">
+                    <span>INTRO</span>
+                </a>
+            </li>
+            <!--DST-->
+            <li>
+                <a>
+                    <img src="../../../images/quest-logo/dragon-logo.png" alt="2">
+                    <span>DST</span>
+                </a>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/DST/mycookpoot/mycookpot.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="2">
+                        <span><p style="font-family:Microsoft YaHei">写一个烹煮锅</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/DST/myfirstsword/myfirstsword.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">从0开始做一把武器</p></span>
+                    </a>
+                </b>
+            </li>
+            <!--Mount&Blade-->
+            <li>
+                <a>
+                    <img src="../../../images/quest-logo/dragon-logo.png" alt="2">
+                    <span>Mount&Blade</span>
+                </a>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/tempnote/tempnote.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">临时笔记</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/extratext/extratext.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">物品添加额外描述</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/MBWbEditor/MBWbEditor.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">魔球触发器</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/txt/txtmain.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">TXT篇</p></span>
+                    </a>
+                </b>
+            </li>
+            <li>
+                <b>
+                    <a href="../../../subpage/MB/others/others.html">
+                        <img src="../../../images/quest-logo/dragon-logo.png" alt="d">
+                        <span><p style="font-family:Microsoft YaHei">杂项</p></span>
+                    </a>
+                </b>
+            </li>
+        </ul>
+    </div>
+    <div class="workzone">
+        <div class="output_wrapper" id="output_wrapper_id" style="font-size: 16px; color: rgb(62, 62, 62); line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;"><p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"><a href="../../../subpage/MB/others/others.html" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: rgb(30, 107, 184); overflow-wrap: break-word;"></a></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><a href="../../../subpage/MB/others/others.html" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: rgb(30, 107, 184); overflow-wrap: break-word;"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">返回</figcaption></a></figure><p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"></p>
+<h1 id="h" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1.6em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">模型提取导入详细教程</span></h1>
+<h5 id="h-1" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">看标题本教程分为提取和导入两部分（但导入实在过于简单，篇幅会很少）</span></h5>
+<h5 id="hmodmod" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">教程目的：教新手从一款MOD中提取需要的模型到自己游玩的MOD中</span></h5>
+<h5 id="hopenbrf" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">需要用到的软件：openbrf和魔球</span></h5>
+<h5 id="h-2" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">教程步骤一览：</span></h5>
+<blockquote style="line-height: inherit; display: block; padding: 15px 15px 15px 1rem; font-size: 0.9em; margin: 1em 0px; color: rgb(129, 145, 152); border-left: 6px solid rgb(220, 230, 240); background: rgb(242, 247, 251); overflow: auto; overflow-wrap: normal; word-break: normal;">
+  <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0px;">1.<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #00bfff;">使用魔球和openbrf快速定位出模型文件和绑定的材质图片</span><br>2.<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #00bfff;">将提取出来的brf文件和dds文件进行修改、打包</span><br>3.<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #00bfff;">使用魔球正确的添加这个新物品</span></p>
+</blockquote>
+<h5 id="h-3" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">提取：</span></h5>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">1.当我们看到一款MOD里有个好看的物品时，第一件事我需要知道这个物品的模型名字叫什么，这个问题可以用魔球解决，我们在游戏中先记住这个物品的名字，然后来到魔球搜索这个物品：<br></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/others-001/001.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;"></figcaption></figure><br>是的我需要这个 “诺多金饰战马”的模型，点模型动作，复制主模型这里的模型名称<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">2．打开MOD路径 打开..\Resource，随便点一个brf进去，然后ctrl+F，搜索模型名称snouz_horse_d_02<br></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/others-001/002.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;"></figcaption></figure><br>我们按顺序来，从模型开始，所以下拉菜单我们选择 模型 ，我们可以看到模型文件就在 /Resource/cwe_horse.brf中，我们点击第一个snouz_horse_d_02进去就可以看到这个模型了。<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">·我们自己新建个工作文件夹 比如叫“temp”，用openbrf新建一个空的brf文件到temp文件夹中的Resource里面。(这里需要告诉大家一个完整的模型，需要有一个brf文件和一个dds文件，并且将它们分别放入Resource文件夹和Textures文件夹中）<br><span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #5bdaed;">我们把snouz_horse_d_02开头的模型全部选中拷贝到我们自己新建的空brf中。</span><br>下面我们对源文件中snouz_horse_d_02开头的这些模型逐个点击 查看材质层名字，直接点击蓝色字体的 “材质”会直接跳转到材质位置。我们再将这些材质拷贝到我们自己新建的空brf中。<br>最后我们找纹理：<br></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/others-001/003.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;"></figcaption></figure><br>把不是none的都给找出来，直接点击左侧 蓝色的字体 可快速跳转，依旧将跳转过去的纹理拷贝到我们自己新建的空brf中。<br><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/others-001/004.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;"></figcaption></figure><br>我们可以发现纹理右下角有open it按钮 ，点击即可直接跳转至dds图片位置，我们将所有图片拷贝到我们的工作文件夹temp中的Textures中。<br>至此，提取确实结束了。<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">接下来，更名。<br>具体怎么更名，命名的艺术来了，前缀+下划线+物品名 即可，为的是变量名不重合。<br>点开我们自己的brf模型选项卡，ctrl+A 选中全部再按F2<br></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/others-001/005.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;"></figcaption></figure><br>公共前缀，例如改成b1_horse_01,接着再改模型绑定的材质的名字 和材质层的名字<br><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/others-001/006.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;"></figcaption></figure><br>只需将多个材质同名的模型同时选中后，即可一次修改 ↑<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">后面的都是重复的修改不再图文讲解了，最后理一遍：<br>模型选项卡的所有名字→模型选项卡所有模型绑定的材质名字→材质选型卡的所有名字→材质选项卡所有材质绑定的纹理名字→纹理选项卡所有纹理名字。（请对应修改）</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">所有修改完毕，ctrl+S保存，打开Textures文件夹，对应修改dds图片文件名。<br>最后可以打开brf再确认下，模型没有问题后，即可。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"><strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;">这里提一嘴，除了主要填充纹理剩下两个分别是法线和高光，有很多模型看起来表面光滑并且贼亮，原因就是没有法线和高光，并且着色器选用的是simple shader，如果你不想看起来贼亮又懒得做高光，那你可以用那个叫skeleton什么的着色器，具体可以自己搜一下，我很久没碰过了。</strong></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">•那么我们的模型到底叫什么名字呢，打开模型选项卡，看一下公共前缀，就是模型的名字。（所以模型的名字并不是brf的文件名。）<br>•最后把brf文件也给改个名字，比如叫：b1_horse_pack.brf<br>这是一个马的合集 对吧，以后我还可以往里面添加其他马，<span style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: #ee82ee;">你的这个temp文件夹就是你的模型合集了，以后你可以把所有你喜欢的模型全都添加到这个temp文件夹里面来，以后遇到一个新的剧本，你就可以直接一次性导入了，不用再去搁那找了。</span></p>
+<hr style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; height: 1px; margin: 1.5rem 0px; border-right: none; border-bottom: none; border-left: none; border-image: initial; border-top: 1px dashed rgb(165, 165, 165);">
+<h5 id="h-4" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px; font-weight: bold; font-size: 1em;"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;">导入：</span></h5>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">打开魔球<br></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="images/others-001/007.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;"></figcaption></figure><br>点击物品导入向导找，找到文件后导入，全点下一步即可。<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">然后随便找一匹马，创建一个新的马，把模型动作选项卡打开，修改模型名为“b1_horse_01”即可</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"><strong style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold;">注意请用魔球导入，手动复制粘贴是显示不出来的，因为配置文件里面还要添加加载项的，用魔球导就行了。</strong></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;">最后在工作文件夹temp下，新建一个readme.txt文档，写上模型的名字，再打包上传群文件还能造福群友，别人一打开文本文档，就知道了模型叫什么了，方便自己也方便他人。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"><a href="../../../subpage/MB/others/others.html" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: rgb(30, 107, 184); overflow-wrap: break-word;"></a></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><a href="../../../subpage/MB/others/others.html" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: rgb(30, 107, 184); overflow-wrap: break-word;"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">返回</figcaption></a></figure><p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.5em 0px;"></p></div>
+
+    </div>
+</body>
+</html>

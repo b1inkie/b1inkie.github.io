@@ -2,6 +2,7 @@
 1.<a href="../../../subpage/MB/MBWbEditor/example-001.html">**超经典例：缓速箭矢**</a>
 2.<a href="../../../subpage/MB/MBWbEditor/example-001.html">**经典例：箭矢杀死无主马**</a>
 3.<a href="../../../subpage/MB/MBWbEditor/example-003.html">**超经典例：一击落马和减速一则**</a>
+4.<a href="../../../subpage/MB/MBWbEditor/example-004.html">**战斗中召唤单位**</a>
 
 #<a id="jump_0"></a>魔球触发器代码说明及纠错
 Q1.**[魔球有哪些触发器](#jump_1)**
