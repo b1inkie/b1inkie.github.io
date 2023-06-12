@@ -1,6 +1,6 @@
 ﻿<a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
 #conversation.txt修改终极版教程 含 可简单套用的模板
-#####打开conversation文件后引入眼帘的是这样的一堆乱七八糟的数字（为了阅读和修改更舒服，可以把语法设置成<span style="color:#800080;">Go</span>）：
+#####打开conversation文件后映入眼帘的是这样的一堆乱七八糟的数字（为了阅读和修改更舒服，可以把语法设置成<span style="color:#800080;">Go</span>）：
 ```python
 dialogsfile version 2
 4835
