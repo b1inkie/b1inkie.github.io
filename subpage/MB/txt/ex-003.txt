@@ -1,0 +1,24 @@
+﻿<a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
+#游戏内添加介绍(游戏概念窗口)
+<span style="color:#800080;">Go</span>
+打开info.pages.txt
+添加一行，格式为：
+**``ip_xxx <项目英文名> <项目具体内容(英文)>``**
+例如：
+
+>**<span style="color:#00ffff;">ip_extrainfo_01</span> extrainfo_01_details To_be_added.**
+
+然后打开汉化文件info_pages.csv, 添加：
+```Go
+ip_extrainfo_01|更 新 计 划
+ip_extrainfo_01_text|第 一 条：^ 第 二 条：
+```
+*ip_xxx 就是项目的名字 后面加个_text就是项目点进去，里面显示的内容。*
+
+
+
+
+
+
+
+<a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
