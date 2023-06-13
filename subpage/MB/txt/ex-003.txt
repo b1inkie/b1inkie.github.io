@@ -1,12 +1,15 @@
 ﻿<a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
 #游戏内添加介绍(游戏概念窗口)
-<span style="color:#800080;">Go</span>
-打开info.pages.txt
+
+打开info_pages.txt
 添加一行，格式为：
 **``ip_xxx <项目英文名> <项目具体内容(英文)>``**
 例如：
 
 >**<span style="color:#00ffff;">ip_extrainfo_01</span> extrainfo_01_details To_be_added.**
+
+同样的，因为加了一条，所以总数要+1。（info_pages.txt第二行的数字。
+如果要加的条数很多，数不过来，可以先把里面换行的地方全都整到一行去，然后用总行数-2即可）
 
 然后打开汉化文件info_pages.csv, 添加：
 ```Go
