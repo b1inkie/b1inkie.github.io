@@ -70,3 +70,5 @@
 对照改好，丢进MBCodeEditor中转成txt，即可。提一嘴MBCodeEditor最下面会显示代码的总行数。
 
 ·**<span style="color:#dc143c;">最后</span>**我们翻到<span style="color:#66cdaa;">conversation.txt</span>的最上面可以看见第二行有个数字，这个是所有对话的行数，我们可以用总行数减去这2行算得。
+
+附一个交流QQ群：855512521(刚创的；没人；真的没有人)

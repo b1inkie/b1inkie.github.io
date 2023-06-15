@@ -221,4 +221,5 @@
 ·再将修改好的一整段 新TXT码 包括它前面的数字(代码行数)，单独拷到另一个文档里
 ·你只需ctrl+F搜旧TXT码，查找所有并替换成新TXT码即可。
 
+附一个交流QQ群：855512521(刚创的；没人；真的没有人)
 <a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>

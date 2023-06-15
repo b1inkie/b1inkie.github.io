@@ -1,0 +1,508 @@
+<a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
+
+#**<span style="color:#00ffff;">武器铭文系统</span>**
+1.描述及效果预览
+2.正篇
+####描述及效果预览
+描述：和指定NPC对话，有铭刻的选项，点击可选择需要铭刻的武器，再次点击出来一列可供选择的铭文，刻上铭文后，武器的面板下面会出现对应的铭文描述。
+效果预览：
+<img src="images/ex-004/001.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;">
+找到指定的NPC，与其对话，我这里设置了一个铭文武器的获取途径，你也可以用其他方法获取，例如击败野怪英雄索取等。
+点击“你能帮我铭刻吗”
+<img src="images/ex-004/002.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;">
+随后出现一个可供选择的列表，我这里只写了一把武器（正篇里的代码是有写2把武器并且给了继续添加的格式）。
+<img src="images/ex-004/003.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;">
+点击进入。跳转到铭文选择界面。点击为武器刻上铭文：
+<img src="images/ex-004/004.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;">
+锋利V不安排起来？w
+最后在游戏介绍里，加上描述：
+<img src="images/ex-004/005.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;">
+铭文具体有什么功能，是随便写的。重点是这个“铭文系统”的设定非常有趣。
+
+聪明的你一定发现了，这个铭文就是<span style="color:#00ffff;">物品描述</span>，如果你还不会给物品添加描述，可以<a href="../../../subpage/MB/extratext/extratext.html">点我跳转至教程页</a>。
+那么关于铭文的种类，我们可以用item的一个slot来储存:
+```
+(item_set_slot,<item_id>,<slot_no>,<value>),
+```
+``<slot_no>``代表铭文的种类，``<value>``代表该铭文的等级，``<value>``为0时表示没有铭文。
+获取铭文种类和等级，则用：
+```
+(item_get_slot,<destination>,<item_id>,<slot_no>),
+```
+剩下的便是给铭文编好号，再看下``物品描述``怎么添加便是了。
+（看到这里如果你会了，后面其实就没啥东西了）
+
+但是如果如果你准备看下去，最好确保已经看过我写的``conversation修改教程``和``给物品添加描述的教程``
+<a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
+***
+#####正篇
+><span style="color:#00ffff;">可能是按照有一丢基础的前提下讲解的</span>
+
+我们先设定一下各个铭文的slot编号和等级上限：
+
+|词条|编号|等级上限|描述|
+|--|--|--|--|
+|诺多杀手|770|5|对诺多增伤/每级+1倍|
+|蛇教克星|771|5|对…增伤/每级+1倍|
+|异端处刑者|772|5|对…增伤/每级+1倍|
+|迦图驱逐者|773|5|对…增伤/每级+1倍|
+|瓦雷利亚淬火|774|8|对…增伤/每级+1倍|
+|净环之刃|775|12|对…增伤/每级+1倍|
+|生命汲取|776|5|造成伤害的3%转化成HP/每级+3%|
+|复仇之剑|777|5|对五国士兵概率暴击/每级+4%|
+
+####看一下“铭文”也就是“物品描述”的添加：
+由于我不知道这个字符串是怎么连接的，所以只能写成这样了，大家看个乐呵
+```python
+(try_begin),
+	(assign,":i_wp_name",-1),#用来存铭文武器名字
+    (try_for_range,":i_wp_no",0,3),#有几把铭文武器你就填几+1
+        (try_begin),
+            (eq,":i_wp_no",1),#当武器编号是1号
+            (eq, ":var_0", "itm_b1_ngkatana"),#武器是1号武器
+            (assign,":i_wp_name","itm_b1_ngkatana"),#填1号武器的ID
+        (else_try),
+            (eq,":i_wp_no",2),#当武器编号是2号
+            (eq, ":var_0", "itm_kg_wp_witcher_silversword"),#武器是2号武器
+            (assign,":i_wp_name","itm_kg_wp_witcher_silversword"),#填2号武器的ID
+            #(else_try),
+            #(eq,":i_wp_no",3),#当武器编号是3号
+            ##(eq, ":var_0", "itm_arena_sword"),#武器是3号武器
+            #(assign,":i_wp_name","itm_arena_sword"),#填3号武器的ID
+        #(else_try),
+            #(eq,":i_wp_no",4),#当武器编号是4号
+            #(eq, ":var_0", "itm_ebony_long_sword"),#武器是4号武器
+            #(assign,":i_wp_name","itm_ebony_long_sword"),#填4号武器的ID
+        (try_end),
+
+        (neq,":i_wp_name",-1),#获取到了铭文武器时
+
+        (try_begin),
+        (eq, ":var_1", 0), #var_1表示物品描述的槽位，0~7一共8个槽
+            (try_begin),
+                (item_slot_eq,":i_wp_name",770,1),#当770号铭文等级为1时
+                (set_result_string, "qstr_i_nordor_killer_2"),#设置铭文
+                (set_trigger_result, 0x00ff00),#设置铭文颜色
+    #然后下面都是重复内容，没啥好看的了。
+    #然后下面都是重复内容，没啥好看的了。
+    #然后下面都是重复内容，没啥好看的了。
+            (else_try),
+                (item_slot_eq,":i_wp_name",770,2),
+                (set_result_string, "qstr_i_nordor_killer_3"),
+                (set_trigger_result, 0x00ff00),
+            (else_try),
+                (item_slot_eq,":i_wp_name",770,3),
+                (set_result_string, "qstr_i_nordor_killer_4"),
+                (set_trigger_result, 0x00ff00),
+            (else_try),
+                (item_slot_eq,":i_wp_name",770,4),
+                (set_result_string, "qstr_i_nordor_killer_5"),
+                (set_trigger_result, 0x00ff00),
+            (else_try),
+                (item_slot_eq,":i_wp_name",770,5),
+                (set_result_string, "qstr_i_snake_killer_1"),
+                (set_trigger_result, 0x00ff00),
+            (try_end),
+        (else_try),
+        (eq, ":var_1", 1),
+            (try_begin),
+                (item_slot_eq,":i_wp_name",771,1),
+                (set_result_string, "qstr_i_snake_killer_2"),
+                (set_trigger_result, 0x98fb98),
+            (else_try),
+                (item_slot_eq,":i_wp_name",771,2),
+                (set_result_string, "qstr_i_snake_killer_3"),
+                (set_trigger_result, 0x98fb98),
+            (else_try),
+                (item_slot_eq,":i_wp_name",771,3),
+                (set_result_string, "qstr_i_snake_killer_4"),
+                (set_trigger_result, 0x98fb98),
+            (else_try),
+                (item_slot_eq,":i_wp_name",771,4),
+                (set_result_string, "qstr_i_snake_killer_5"),
+                (set_trigger_result, 0x98fb98),
+            (else_try),
+                (item_slot_eq,":i_wp_name",771,5),
+                (set_result_string, "qstr_i_heretics_killer_1"),
+                (set_trigger_result, 0x98fb98),
+            (try_end),
+        (else_try),
+        (eq, ":var_1", 2),
+            (try_begin),
+                (item_slot_eq,":i_wp_name",772,1),
+                (set_result_string, "qstr_i_heretics_killer_2"),
+                (set_trigger_result, 0x4b0082),
+            (else_try),
+                (item_slot_eq,":i_wp_name",772,2),
+                (set_result_string, "qstr_i_heretics_killer_3"),
+                (set_trigger_result, 0x4b0082),
+            (else_try),
+                (item_slot_eq,":i_wp_name",772,3),
+                (set_result_string, "qstr_i_heretics_killer_4"),
+                (set_trigger_result, 0x4b0082),
+            (else_try),
+                (item_slot_eq,":i_wp_name",772,4),
+                (set_result_string, "qstr_i_heretics_killer_5"),
+                (set_trigger_result, 0x4b0082),
+            (else_try),
+                (item_slot_eq,":i_wp_name",772,5),
+                (set_result_string, "qstr_i_jatu_killer_1"),
+                (set_trigger_result, 0x4b0082),
+            (try_end),
+        (else_try),
+        (eq, ":var_1", 3),
+            (try_begin),
+                (item_slot_eq,":i_wp_name",773,1),
+                (set_result_string, "qstr_i_jatu_killer_2"),
+                (set_trigger_result, 0xa0522d),
+            (else_try),
+                (item_slot_eq,":i_wp_name",773,2),
+                (set_result_string, "qstr_i_jatu_killer_3"),
+                (set_trigger_result, 0xa0522d),
+            (else_try),
+                (item_slot_eq,":i_wp_name",773,3),
+                (set_result_string, "qstr_i_jatu_killer_4"),
+                (set_trigger_result, 0xa0522d),
+            (else_try),
+                (item_slot_eq,":i_wp_name",773,4),
+                (set_result_string, "qstr_i_jatu_killer_5"),
+                (set_trigger_result, 0xa0522d),
+            (else_try),
+                (item_slot_eq,":i_wp_name",773,5),
+                (set_result_string, "qstr_i_ww_killer_1"),
+                (set_trigger_result, 0xa0522d),
+            (try_end),
+        (else_try),
+        (eq, ":var_1", 4),
+            (try_begin),
+                (item_slot_eq,":i_wp_name",774,1),
+                (set_result_string, "qstr_i_ww_killer_2"),
+                (set_trigger_result, 0xffffff),
+            (else_try),
+                (item_slot_eq,":i_wp_name",774,2),
+                (set_result_string, "qstr_i_ww_killer_3"),
+                (set_trigger_result, 0xffffff),
+            (else_try),
+                (item_slot_eq,":i_wp_name",774,3),
+                (set_result_string, "qstr_i_ww_killer_4"),
+                (set_trigger_result, 0xffffff),
+            (else_try),
+                (item_slot_eq,":i_wp_name",774,4),
+                (set_result_string, "qstr_i_ww_killer_5"),
+                (set_trigger_result, 0xffffff),
+            (else_try),
+                (item_slot_eq,":i_wp_name",774,5),
+                (set_result_string, "qstr_i_ww_killer_6"),
+                (set_trigger_result, 0xffffff),
+            (else_try),
+                (item_slot_eq,":i_wp_name",774,6),
+                (set_result_string, "qstr_i_ww_killer_7"),
+                (set_trigger_result, 0xffffff),
+            (else_try),
+                (item_slot_eq,":i_wp_name",774,7),
+                (set_result_string, "qstr_i_ww_killer_8"),
+                (set_trigger_result, 0xffffff),
+            (else_try),
+                (item_slot_eq,":i_wp_name",774,8),
+                (set_result_string, "qstr_i_ring_killer_1"),
+                (set_trigger_result, 0xffffff),
+            (try_end),
+        (else_try),
+        (eq, ":var_1", 5),
+            (try_begin),
+                (item_slot_eq,":i_wp_name",775,1),
+                (set_result_string, "qstr_i_ring_killer_2"),
+                (set_trigger_result, 0xf5f5f5),
+            (else_try),
+                (item_slot_eq,":i_wp_name",775,2),
+                (set_result_string, "qstr_i_ring_killer_3"),
+                (set_trigger_result, 0xf5f5f5),
+            (else_try),
+                (item_slot_eq,":i_wp_name",775,3),
+                (set_result_string, "qstr_i_ring_killer_4"),
+                (set_trigger_result, 0xf5f5f5),
+            (else_try),
+                (item_slot_eq,":i_wp_name",775,4),
+                (set_result_string, "qstr_i_ring_killer_5"),
+                (set_trigger_result, 0xf5f5f5),
+            (else_try),
+                (item_slot_eq,":i_wp_name",775,5),
+                (set_result_string, "qstr_i_ring_killer_6"),
+                (set_trigger_result, 0xf5f5f5),
+            (else_try),
+                (item_slot_eq,":i_wp_name",775,6),
+                (set_result_string, "qstr_i_ring_killer_7"),
+                (set_trigger_result, 0xf5f5f5),
+            (else_try),
+                (item_slot_eq,":i_wp_name",775,7),
+                (set_result_string, "qstr_i_ring_killer_8"),
+                (set_trigger_result, 0xf5f5f5),
+            (else_try),
+                (item_slot_eq,":i_wp_name",775,8),
+                (set_result_string, "qstr_i_ring_killer_9"),
+                (set_trigger_result, 0xf5f5f5),
+            (else_try),
+                (item_slot_eq,":i_wp_name",775,9),
+                (set_result_string, "qstr_i_ring_killer_10"),
+                (set_trigger_result, 0xf5f5f5),
+            (else_try),
+                (item_slot_eq,":i_wp_name",775,10),
+                (set_result_string, "qstr_i_ring_killer_11"),
+                (set_trigger_result, 0xf5f5f5),
+            (else_try),
+                (item_slot_eq,":i_wp_name",775,11),
+                (set_result_string, "qstr_i_ring_killer_12"),
+                (set_trigger_result, 0xf5f5f5),
+            (else_try),
+                (item_slot_eq,":i_wp_name",775,12),
+                (set_result_string, "qstr_i_drain_1"),
+                (set_trigger_result, 0xf5f5f5),
+            (try_end),
+        (else_try),
+        (eq, ":var_1", 6),
+            (try_begin),
+                (item_slot_eq,":i_wp_name",776,1),
+                (set_result_string, "qstr_i_drain_2"),
+                (set_trigger_result, 0xb22222),
+            (else_try),
+                (item_slot_eq,":i_wp_name",776,2),
+                (set_result_string, "qstr_i_drain_3"),
+                (set_trigger_result, 0xb22222),
+            (else_try),
+                (item_slot_eq,":i_wp_name",776,3),
+                (set_result_string, "qstr_i_drain_4"),
+                (set_trigger_result, 0xb22222),
+            (else_try),
+                (item_slot_eq,":i_wp_name",776,4),
+                (set_result_string, "qstr_i_drain_5"),
+                (set_trigger_result, 0xb22222),
+            (else_try),
+                (item_slot_eq,":i_wp_name",776,5),
+                (set_result_string, "qstr_i_critical_1"),
+                (set_trigger_result, 0xb22222),
+            (try_end),
+        (else_try),
+        (eq, ":var_1", 7),
+            (try_begin),
+                (item_slot_eq,":i_wp_name",777,1),
+                (set_result_string, "qstr_i_critical_2"),
+                (set_trigger_result, 0xffd700),
+            (else_try),
+                (item_slot_eq,":i_wp_name",777,2),
+                (set_result_string, "qstr_i_critical_3"),
+                (set_trigger_result, 0xffd700),
+            (else_try),
+                (item_slot_eq,":i_wp_name",777,3),
+                (set_result_string, "qstr_i_critical_4"),
+                (set_trigger_result, 0xffd700),
+            (else_try),
+                (item_slot_eq,":i_wp_name",777,4),
+                (set_result_string, "qstr_i_critical_5"),
+                (set_trigger_result, 0xffd700),
+            (else_try),
+                (item_slot_eq,":i_wp_name",777,5),
+                (set_result_string, "qstr_end_all"),
+                (set_trigger_result, 0xffd700),
+            (try_end),
+        (try_end),
+    (try_end),
+(try_end),
+```
+写好之后，我们先把game_get_item_extra_text里，已有的代码全部转成PY转出来，把我们新写的加进去。最后再丢进MBCE转成TXT（注意改game_get_item_extra_text下的第一行的代码行数），这样可以确保没有任何问题！
+
+####给这些铭文添加对应的功能，我全都写在了mission_templates的伤害计算里面了：
+·我这里以潘德为例，每个MOD不一样，你找到你自己MOD的伤害计算，当然你也可以在其他地方写别的功能，我这里基本都是增伤，图省事儿，全都写在一块儿。
+<span style="color:#00ffff;">对指定阵营增伤代码↓</span>
+```python
+#注，伤害计算系统的本身已有的代码我就不放了，就说下几个变量是干什么的
+    #var_7是攻击者的武器ID
+    #var_8是敌人的兵种ID
+    #var_5是输出伤害
+(try_begin),
+    (assign,":i_wp_name",-1),
+    (try_begin),
+        (eq, ":var_7", "itm_kg_wp_witcher_silversword"),#当武器是铭文武器时
+        (assign,":i_wp_name","itm_kg_wp_witcher_silversword"),#将ID存进去
+    (else_try),
+        (eq, ":var_7", "itm_b1_ngkatana"),#当武器是铭文武器时
+        (assign,":i_wp_name","itm_b1_ngkatana"),#将ID存进去
+    (try_end),
+    (neq,":i_wp_name",-1),#当获取到铭文武器时
+
+    (store_troop_faction, ":var_17", ":var_8"),#获取敌人阵营
+    (assign,":i_wp_kind_no",-1),#这个变量用于存放铭文的编号
+    (try_begin),
+        (eq,":var_17","fac_noldor_elves"),#当敌人是诺多
+        (assign,":i_wp_kind_no",770),#则将诺多杀手这个铭文的编号存进去
+    (else_try),
+        (eq,":var_17","fac_snake_cult"),
+        (assign,":i_wp_kind_no",771),
+    (else_try),
+        (eq,":var_17","fac_heretics"),
+        (assign,":i_wp_kind_no",772),
+    (else_try),
+        (eq,":var_17","fac_jatu"),
+        (assign,":i_wp_kind_no",773),
+    (else_try),
+        (eq,":var_17","fac_allenemy_ww"),
+        (assign,":i_wp_kind_no",774),
+    (else_try),
+        (eq,":var_17","fac_enemy_adring"),
+        (assign,":i_wp_kind_no",775),
+    (try_end),
+    #----一直到这里结束，我们是为了判断出敌人的种类，然后获取对应的铭文编号
+    (neq,":i_wp_kind_no",-1),#如果编号不是-1，也就是获取到了敌人的种类是我们需要的那几种
+    (item_get_slot,":true_i_lv",":i_wp_name",":i_wp_kind_no"),#获取铭文等级
+    (gt,":true_i_lv",0),#如果铭文等级大于0
+    (val_add,":true_i_lv",1),#设置增益伤害倍率
+    (val_mul, ":var_5", ":true_i_lv"),#输出伤害x倍率;因为是线性的所以就这么简单了
+(try_end),
+```
+<span style="color:#00ffff;">暴击↓</span>
+```python
+(try_begin),
+    (neq,":i_wp_name",-1), #使用的是铭文武器时,ps:上面已经获取过一次武器ID了哦
+    #--------是否为五国士兵
+    (store_troop_faction, ":var_17", ":var_8"),
+    (this_or_next|eq, ":var_17", "fac_kingdom_1"),
+    (this_or_next|eq, ":var_17", "fac_kingdom_2"),
+    (this_or_next|eq, ":var_17", "fac_kingdom_3"),
+    (this_or_next|eq, ":var_17", "fac_kingdom_4"),
+    (eq, ":var_17", "fac_kingdom_5"),
+    #------获取当前铭文武器的暴击等级
+    (item_get_slot,":true_i_lv_critical",":i_wp_name",776),
+    #------
+    (gt,":true_i_lv_critical",0),
+    (val_mul,":true_i_lv_critical",4),#每一级暴击率+4%
+    (store_random_in_range,":i_true_random",0,100),
+    (try_begin),
+        (is_between,":i_true_random",0,":true_i_lv_critical"),#如果暴击
+        (assign,":i_critical_dmg_mul",1),
+        (store_skill_level,":user_skl_power_strike_lv",skl_power_strike,":user"),#获取强击等级
+        (val_div,":user_skl_power_strike_lv",10),
+        (val_add,":i_critical_dmg_mul",":user_skl_power_strike_lv"),#爆伤倍率
+        (val_mul,":var_5",":i_critical_dmg_mul"),
+    (try_end),
+(try_end),
+```
+<span style="color:#00ffff;">吸血↓</span>
+```python
+(try_begin),
+    (neq,":i_wp_name",-1), #使用的是铭文武器时,ps:上面已经获取过一次武器ID了哦
+    #--------获取当前铭文武器的吸血等级
+    (item_get_slot,":true_i_lv_drain",":i_wp_name",776),
+    #--------设置吸血量: 最终伤害*3%*吸血等级
+    (gt,":true_i_lv_drain",0),
+    (store_mul,":i_drain_count_1",":var_5",3),
+    (val_mul,":i_drain_count_1",":true_i_lv_drain"),
+    (val_div,":i_drain_count_1",100),
+    #--------
+    (store_agent_hit_points,":user_cur_hp",":var_2",1),#获取当前生命
+    (store_add,":i_drain_count_true",":i_drain_count_1",":user_cur_hp"),#回复后的生命数值
+    (agent_set_hit_points, ":var_2", ":i_drain_count_true",1),#回血；貌似溢出也没关系，所以就这样写了
+(try_end),
+```
+我们看一眼```伤害计算系统```的最后一行是：
+**```(set_trigger_result, ":var_5"),```**
+整个伤害计算系统就是为了返回这个变量的值的，也就是实际伤害值。
+所以我们的3块代码要放在这句的上面，吸血因为要按实际伤害的值来算，所以放在最后，对阵营的伤害可以再往前面放一些。
+<span style="color:red;">最后我们把这些代码全都插进去之后，把整个伤害计算系统的码全部丢进MBCE里面转成TXT，不能单独把1块代码放进MBCE转TXT然后直接插进去，因为这样你设置的变量可能会和后面的变量重名。</span>
+
+最后我们搜一小段伤害计算的txt，把那一行拉出来 ctrl+F选中 查找所有，全部替换。（相信我一定要这样做）
+
+####最后是添加conversation对话
+预览图中我是新建的一个NPC，所以开始对话的代码框架和之前教程的不太一样，而且第一句要往前面放一些；因为要知道，当我们创建一个新的兵种时，即便我们没有给他设置对话，我们一样可以和他对话。为了覆盖掉默认的模板对话，我们自己写的就要放在前面。 如果你还不会添加NPC，也可以直接添加在酒馆老板的对话中。
+```Go
+这一句一定要往前面放一点，具体多前，不知道，或者你直接放所有对话的最前面试试
+而且这一句是 “开始对话” 仔细看 结构和其他句子不一样 
+dlga_start:inscriptioner_talk 4095 0  1 31 2 144115188075855892 360287970189641109  To_be_added. 11070 0 NO_VOICEOVER 
+```
+上面这一段可以无视掉。
+下面给出放在酒馆老板对话中的代码：
+```Go
+这里我换了一个习惯,以后我们添加新对话的第一句，先写一个pretalk，让它连接到当前的选择支窗格！
+dlga_1_menu_tk_insp:pretalk 4095 10100 0 Anything_else? 1151 0 NO_VOICEOVER
+dlga_1_menu_tk_insp:ask_for_insp 69631 1151 0 can_u_inscript_4_my_wp? 10101 0 NO_VOICEOVER
+dlga_2_menu_tk_insp:reply_1_menu 4095 10101 0 sure,_which_wp? 10102 0 NO_VOICEOVER
+这里我又换了一个习惯,以后我们先写返回选择支，有很多好处。1.后续添加新选择支时不会被窗格编号恶心2.当有很多选择支时，不用往下翻就可以返回3.其实还有我懒得写了…
+dlga_2_menu_tk_insp:cancel 69631 10102 0 next_time. 10100 0 NO_VOICEOVER
+
+这两行是选择武器 可以继续添加
+dlga_2_menu_tk_insp:choose_wp_1 69631 10102 1 150 1 288230376151713586 b1_ngkatana. 10103 1 500 3 360287970189639680 900 1 NO_VOICEOVER
+dlga_2_menu_tk_insp:choose_wp_2 69631 10102 1 150 1 288230376151713603 witcher_swd. 10103 1 500 3 360287970189639680 900 1 NO_VOICEOVER
+
+
+dlga_3_menu_insp_for_wp:inscriptioner_reply 4095 10103 0 allright,_which_insp_do_u_choose? 10104 0 NO_VOICEOVER
+先写返回选择支
+dlga_3_menu_insp_for_wp:list_cancel 69631 10104 0 next_time. 10101 0 NO_VOICEOVER
+
+dlga_3_menu_insp_for_wp:list_1_nordorrr 69631 10104 10 150 1 288230376151711870 520 3 1224979098644774912 360287970189639680 900 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 770 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 770 3 0 2147483678 2 1224979098644774913 5 nordor_krrr. 10103 13 520 3 1224979098644774912 360287970189639680 780 1531 2 360287970189639680 288230376151711870 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 770 2105 2 1224979098644774913 1 507 3 288230376151713586 770 1224979098644774913 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 770 2105 2 1224979098644774913 1 507 3 288230376151713603 770 1224979098644774913 3 0 NO_VOICEOVER
+dlga_3_menu_insp_for_wp:list_2_snakeeee 69631 10104 10 150 1 288230376151711870 520 3 1224979098644774912 360287970189639680 900 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 771 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 771 3 0 2147483678 2 1224979098644774913 5 snake_krrrr. 10103 13 520 3 1224979098644774912 360287970189639680 780 1531 2 360287970189639680 288230376151711870 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 771 2105 2 1224979098644774913 1 507 3 288230376151713586 771 1224979098644774913 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 771 2105 2 1224979098644774913 1 507 3 288230376151713603 771 1224979098644774913 3 0 NO_VOICEOVER
+dlga_3_menu_insp_for_wp:list_3_heretics 69631 10104 10 150 1 288230376151711870 520 3 1224979098644774912 360287970189639680 900 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 772 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 772 3 0 2147483678 2 1224979098644774913 5 heretics_kr. 10103 13 520 3 1224979098644774912 360287970189639680 780 1531 2 360287970189639680 288230376151711870 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 772 2105 2 1224979098644774913 1 507 3 288230376151713586 772 1224979098644774913 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 772 2105 2 1224979098644774913 1 507 3 288230376151713603 772 1224979098644774913 3 0 NO_VOICEOVER
+dlga_3_menu_insp_for_wp:list_4_jatuuuuu 69631 10104 10 150 1 288230376151711870 520 3 1224979098644774912 360287970189639680 900 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 773 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 773 3 0 2147483678 2 1224979098644774913 5 jatu_krrrrr. 10103 13 520 3 1224979098644774912 360287970189639680 780 1531 2 360287970189639680 288230376151711870 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 773 2105 2 1224979098644774913 1 507 3 288230376151713586 773 1224979098644774913 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 773 2105 2 1224979098644774913 1 507 3 288230376151713603 773 1224979098644774913 3 0 NO_VOICEOVER
+dlga_3_menu_insp_for_wp:list_5_wwwwwwww 69631 10104 10 150 1 288230376151711870 520 3 1224979098644774912 360287970189639680 900 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 774 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 774 3 0 2147483678 2 1224979098644774913 8 ww_krrrrrrr. 10103 13 520 3 1224979098644774912 360287970189639680 780 1531 2 360287970189639680 288230376151711870 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 774 2105 2 1224979098644774913 1 507 3 288230376151713586 774 1224979098644774913 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 774 2105 2 1224979098644774913 1 507 3 288230376151713603 774 1224979098644774913 3 0 NO_VOICEOVER
+dlga_3_menu_insp_for_wp:list_6_ringgggg 69631 10104 10 150 1 288230376151711870 520 3 1224979098644774912 360287970189639680 900 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 775 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 775 3 0 2147483678 2 1224979098644774913 12 ring_krrrr. 10103 13 520 3 1224979098644774912 360287970189639680 780 1531 2 360287970189639680 288230376151711870 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 775 2105 2 1224979098644774913 1 507 3 288230376151713586 775 1224979098644774913 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 775 2105 2 1224979098644774913 1 507 3 288230376151713603 775 1224979098644774913 3 0 NO_VOICEOVER
+dlga_3_menu_insp_for_wp:list_7_drainnnn 69631 10104 10 150 1 288230376151711870 520 3 1224979098644774912 360287970189639680 900 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 776 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 776 3 0 2147483678 2 1224979098644774913 5 drainnnnnnn. 10103 13 520 3 1224979098644774912 360287970189639680 780 1531 2 360287970189639680 288230376151711870 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 776 2105 2 1224979098644774913 1 507 3 288230376151713586 776 1224979098644774913 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 776 2105 2 1224979098644774913 1 507 3 288230376151713603 776 1224979098644774913 3 0 NO_VOICEOVER
+dlga_3_menu_insp_for_wp:list_8_critical 69631 10104 10 150 1 288230376151711870 520 3 1224979098644774912 360287970189639680 900 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 777 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 777 3 0 2147483678 2 1224979098644774913 5 criticallll. 10103 13 520 3 1224979098644774912 360287970189639680 780 1531 2 360287970189639680 288230376151711870 4 0 31 2 1224979098644774912 1 527 3 1224979098644774913 288230376151713586 777 2105 2 1224979098644774913 1 507 3 288230376151713586 777 1224979098644774913 5 0 31 2 1224979098644774912 2 527 3 1224979098644774913 288230376151713603 777 2105 2 1224979098644774913 1 507 3 288230376151713603 777 1224979098644774913 3 0 NO_VOICEOVER
+敲完记得删掉空行 和 改conversation的总行数
+```
+这上面的一大串，真的是我手敲的，真的不是编译来的。/苦笑
+
+（如果你不记得对话了，翻到上面再看一遍）我还是稍微讲一讲：
+
+1.我们点击：你能帮我铭文？<span style="color:#00ffff;">→</span>2.进入武器选择界面：选择武器<span style="color:#00ffff;">→</span>3.进入铭文选择界面：选择铭文
+当我们进入武器选择界面，用**``(player_has_item, <item_id>),``**来判断玩家是否有这个铭文武器，不过这样写的话，物品必须放在背包里才行，为了省事儿，就这一句就够了。
+然后注意点选武器的触发结果怎么写？如果我们什么不都写，直接跳转到铭文选择界面的话，当我们有两把武器可供选择时，就分不清是哪一把了。
+<span style="color:#00ffff;">所以我们用一个troop的slot把 武器 存起来。</span>
+点选武器后触发结果：``(troop_set_slot, "trp_player", 900, 1),``
+可以看到玩家兵种的900号slot被我设置成了1。这个1就是当前武器的编号了。
+我们提前给武器设定好编号：
+比如 1号是``"itm_b1_ngkatana"``2号是``"itm_kg_wp_witcher_silversword"``
+
+选择 诺多杀手 铭文的触发条件:
+```python
+(player_has_item, "itm_qualis"),#玩家有龙泪才能触发
+(troop_get_slot, ":var_0", "trp_player", 900),#获取玩家900号slot的值，也就是武器编号
+(try_begin),
+    (eq, ":var_0", 1),#如果是1号武器
+    (item_get_slot, ":var_1", "itm_b1_ngkatana", 770),#获取诺多杀手
+(else_try),
+    (eq, ":var_0", 2),#如果是2号武器
+    (item_get_slot, ":var_1", "itm_kg_wp_witcher_silversword", 770),#获取诺多杀手
+(try_end),
+(lt, ":var_1", 5),#判断诺多杀手的当前等级 不能超过设定的最大等级5
+```
+选择 诺多杀手 铭文的触发结果:
+```python
+(troop_get_slot, ":var_0", "trp_player", 780),#获取玩家900号slot的值，也就是武器编号
+(troop_remove_item, "trp_player", "itm_qualis"),#移除玩家的龙泪
+(try_begin),
+    (eq, ":var_0", 1),#如果是1号武器
+    (item_get_slot, ":var_1", "itm_b1_ngkatana", 770),#获取诺多杀手
+    (val_add, ":var_1", 1),
+    (item_set_slot, "itm_b1_ngkatana", 770, ":var_1"),#增加1级
+(else_try),
+    (eq, ":var_0", 2),#如果是2号武器
+    (item_get_slot, ":var_1", "itm_kg_wp_witcher_silversword", 770),#获取诺多杀手
+    (val_add, ":var_1", 1),
+    (item_set_slot, "itm_kg_wp_witcher_silversword", 770, ":var_1"),#增加1级
+(try_end),
+```
+
+
+这conversation你别看着乱，但只要你看过我的<a href="../../../subpage/MB/txt/ex-002.html">conversation教程</a>，你写这玩意速度不比写源码慢，这东西贼简单写起来其实。
+
+最后是conversation的汉化，quick_string快速字符串 和 它的汉化，这3样东西没什么好说的了。
+
+就这样！正儿八经看ms才10几天ww。 附一个交流QQ群：855512521(刚创的；没人；真的没有人)
+
+
+
+
+
+
+
+
+
+
+<a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
