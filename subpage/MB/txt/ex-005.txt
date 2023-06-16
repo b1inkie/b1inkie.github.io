@@ -1,0 +1,38 @@
+<a id="jump_0"></a>
+<a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回TXT合集" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
+
+1.[潘德：与奎哥芬对话可以扣诺多关系（为了解决与诺多关系高了，不能干架）](#jump_1)
+
+
+***
+<a id="jump_1"></a>
+1.潘德：与奎哥芬对话可以扣诺多关系（为了解决与诺多关系高了，不能干架）
+
+打开conversation.txt最下面加上, 因为加了2句，所以conversation第二行的数字要+2，或者你拿总行数-2也行：
+```Go
+dlga_1_menu_quigfen:pretalk 4095 10210 0 Anything_else? 1185 0 NO_VOICEOVER
+dlga_1_menu_quigfen:swear_nordor 69631 1185 0 swear_word. 10210 1 1 3 936748722493063445 432345564227567643 -1 NO_VOICEOVER
+```
+打开汉化文件\languages\cns\dialogs.csv：
+```Go
+dlga_1_menu_quigfen:pretalk|你 最 好 有 事 。
+dlga_1_menu_quigfen:swear_nordor|诺 多 给 你 脸 了 ， 你 卖 它 们 武 器 ？ （ -1 与 诺 多 关 系 ） 
+```
+完事。与奎哥芬对话的最下面有个辱骂选项，点一次与诺多关系-1。
+***
+
+
+
+[<img src="../../../subpage/DST/myfirstsword/images/town.png" alt="回到顶端" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;">](#jump_0)
+
+<span style="font-size:9px;">正儿八经看ms才10几天ww。 附一个交流QQ群：855512521(刚创的；没人；真的没有人)</span>
+
+
+
+
+
+
+
+
+
+

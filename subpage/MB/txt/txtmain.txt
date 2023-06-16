@@ -4,3 +4,4 @@
 2.<a href="../../../subpage/MB/txt/ex-002.html">**<span style="color:#dc143c;font-size:20px;">conversation.txt修改终极版教程</span>及新手也可简单套用的模板</span>**</a>
 3.<a href="../../../subpage/MB/txt/ex-003.html">**游戏内添加介绍(游戏概念窗口)**</a>
 4.<a href="../../../subpage/MB/txt/ex-004.html">**武器铭文系统(找你的铭文镌刻师给武器刻上铭文吧！)**</a>
+5.<a href="../../../subpage/MB/txt/ex-005.html">**实用修改合集**</a>
