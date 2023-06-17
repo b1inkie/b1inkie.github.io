@@ -1,7 +1,8 @@
 ﻿#TXT合集(修改及教程)
-#####*<span style="color:#dc143c;">红色</span>为纯教程篇*
+#####*<span style="color:#dc143c;">红色</span>为重要教程篇*
 1.<a href="../../../subpage/MB/txt/ex-001.html">**添加一把对指定阵营士兵造成多倍伤害的武器**</a>
 2.<a href="../../../subpage/MB/txt/ex-002.html">**<span style="color:#dc143c;font-size:20px;">conversation.txt修改终极版教程</span>及新手也可简单套用的模板</span>**</a>
 3.<a href="../../../subpage/MB/txt/ex-003.html">**游戏内添加介绍(游戏概念窗口)**</a>
 4.<a href="../../../subpage/MB/txt/ex-004.html">**武器铭文系统(找你的铭文镌刻师给武器刻上铭文吧！)**</a>
-5.<a href="../../../subpage/MB/txt/ex-005.html">**实用修改合集**</a>
+5.<a href="../../../subpage/MB/txt/ex-005.html">**<span style="color:#008000;">实用修改合集</span>**</a>
+B.<a href="../../../subpage/MB/txt/ex-006.html">**<span style="color:#663399;">笔记合集</span>**</a>
