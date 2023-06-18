@@ -1,24 +1,35 @@
 <a id="jump_0"></a>
 <a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回TXT合集" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
 
-1.[潘德：放置NPC到酒馆](#jump_1)
+1.[放置NPC到酒馆](#jump_1)
 
 
 ***
 <a id="jump_1"></a>
-1.潘德：放置NPC到酒馆
+1.放置NPC到酒馆
 
-之前用的是
-```python
-(add_troop_to_site, "trp_b1_npc_chris", "scn_town_6_tavern", 8),
-```
-是把troop添加到场景，8是位置，但有个问题，会占用市民的位子，且人物会站在长凳上。
-现在用这一句就完美解决了：
-simple trigger中添加：
+
+若是潘德，可以用这一句。
 ```python
 (party_set_slot, ":p_town_6", slot_center_npc_volunteer_troop_type, ":trp_b1_npc_weapon_mas"),
 ```
-注simple trigger的第一个参数为间隔时间。
+就这一句，但有个问题，没法设置多个troop。
+
+现改用这个：
+```python
+(add_troop_to_site,<troop_id>,<scene_id>,<entry_no>),
+```
+是把troop添加到场景（注意是场景scn开头），<entry_no>是位置，但有个问题，乱填可能会占用市民的位子，且人物会站在长凳上。
+这时需要打开ctrl+E打开编辑模式，左下角下拉菜单选entry point：
+<img src="../../../subpage/MB/txt/images/ex-006/001.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;">
+界面中可以看到很多箭头：
+<img src="../../../subpage/MB/txt/images/ex-006/002.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;">
+右键任意箭头可以看到，该箭头的entry_no：
+<img src="../../../subpage/MB/txt/images/ex-006/003.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;">
+或者右键任意位置，放置新entry_no，按住Z移动鼠标可以改变箭头朝向。
+最后用simple trigger或trigger来添加；或是其他方式等等。
+讲完
+
 ***
 
 
