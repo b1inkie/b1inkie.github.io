@@ -1,0 +1,124 @@
+<a id="jump_0"></a>
+<a href="../../../subpage/MB/txt/txtmain.html"><img src="../../../images/quest-logo/farm.png" alt="返回TXT合集" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"></a>
+
+#制作一个“对话型”任务
+##大致描述
+与某NPC对话，领取任务。满足完成任务所需条件，出现新的对话，点击即可交差。
+##框架
+·这次我们将框架写好放进script中方便以后猴子都可以调用
+·**``我们用troop的slot号来表示任务编号，用1表示任务被接取但未完成，用2表示已满足任务完成所需条件``**
+*请确保已看过conversation教程！*
+```python
+对话型任务框架：
+
+任务领取前对话() '选择支触发条件'/b1_quest_before
+(store_script_param, ":var_0", 1), #发起任务的NPC的ID
+(store_script_param, ":var_1", 2), #该NPC的任务编号 用的是slot 数字要大一点 例从1100开始
+(troop_get_slot,":quest_state",":var_0",":var_1"),
+(neq,":quest_state",1),
+(neq,":quest_state",2),
+
+任务成功领取() '触发结果'/b1_quest_fetch
+(store_script_param, ":var_0", 1), #发起任务的NPC的ID
+(store_script_param, ":var_1", 2), #该NPC的任务编号 用的是slot 数字要大一点 例从1100开始
+(store_script_param, ":var_2", 3), #任务领取成功的提示字符串 string
+(troop_set_slot,":var_0",":var_1",1),
+(play_sound,"snd_quest_taken",0), #任务接取声音，请自己设定
+(display_message,":var_2",0x800080), #任务接取提示
+
+任务进行中对话(未满足成功条件) '选择支触发条件' /b1_quest_doing+(不满足成功条件)
+(store_script_param, ":var_0", 1), #发起任务的NPC的ID
+(store_script_param, ":var_1", 2), #该NPC的任务编号 用的是slot 数字要大一点 例从1100开始
+(troop_slot_eq,":var_0",":var_1",1),
+
+任务进行中对话(满足成功条件) '选择支触发条件'/b1_quest_doing+(满足成功条件)
+
+任务成功领取奖励() '触发结果'/b1_quest_reward
+(store_script_param, ":var_0", 1), #发起任务的NPC的ID
+(store_script_param, ":var_1", 2), #该NPC的任务编号 用的是slot 数字要大一点 例从1100开始
+(store_script_param, ":var_2", 3), #任务完成 领取奖励的 字符串string
+(troop_set_slot,":var_0",":var_1",2),
+(play_sound,"snd_quest_completed",0),
+(display_message,":var_2",0x00ff00),
+```
+最后我们转成TXT放进script中：
+```python
+b1_quest_before -1
+ 5 23 2 1224979098644774912 1 23 2 1224979098644774913 2 520 3 1224979098644774914 1224979098644774912 1224979098644774913 2147483679 2 1224979098644774914 1 2147483679 2 1224979098644774914 2 
+b1_quest_fetch -1
+ 6 23 2 1224979098644774912 1 23 2 1224979098644774913 2 23 2 1224979098644774914 3 500 3 1224979098644774912 1224979098644774913 1 600 2 1152921504606846980 0 1106 2 1224979098644774914 8388736 
+b1_quest_doing -1
+ 3 23 2 1224979098644774912 1 23 2 1224979098644774913 2 540 3 1224979098644774912 1224979098644774913 1 
+b1_quest_reward -1
+ 6 23 2 1224979098644774912 1 23 2 1224979098644774913 2 23 2 1224979098644774914 3 500 3 1224979098644774912 1224979098644774913 2 600 2 1152921504606846981 0 1106 2 1224979098644774914 65280 
+```
+调用方式：
+```python
+(call_script,<script_id>,<第1个参数>,<第2个参数>,<第3个参数>,……),
+```
+***
+##实例：
+><span style="color:#00ffff;">酒馆老板让我们给他带去1份羊毛，任务报酬给5000第纳尔。</span>
+
+酒馆老板对话：
+选择支a|老板，你有什么任务交给我吗？
+NPC回复|有啊，你能帮我带一袋羊毛回来吗，事成之后，我会给你报酬的。
+选择支b|好的，我去办。
+
+选择支a触发条件：任务领取前对话
+```python
+(call_script,"b1_quest_before",trp_town_3_tavernkeeper,1100), #任务编号为1100
+```
+选择支b触发结果：任务成功领取
+```python
+(call_script,"b1_quest_fetch",trp_town_3_tavernkeeper,1100,"str_b1_quest_12_fetch"), #任务编号为1100
+```
+><span style="color:#00ffff;">领取成功后，我们要写两种对话，一是领取了任务但不满足任务完成条件，一是领取了且满足任务完成条件（也就是可以交差了）</span>
+
+酒馆老板对话：
+选择支a|关于那个任务……
+NPC回复|我看好你，不着急，你慢慢办。
+选择支b|你能再提醒一下我任务内容吗？
+NPC回复|就一袋羊毛，带给我就行了。
+
+选择支a触发条件：任务进行中对话(未满足成功条件)
+```python
+(call_script,"b1_quest_doing",trp_town_3_tavernkeeper,1100),
+
+(neg|player_has_item,"itm_wool"),#未满足成功条件
+```
+
+酒馆老板对话：
+选择支a|那个任务我搞定了！
+NPC回复a|羊毛带来了是吧
+选择支b|你点点看。
+NPC回复b|看来没什么问题了，这是给你的报酬！
+
+选择支a触发条件：任务进行中对话(满足成功条件)
+```python
+(call_script,"b1_quest_doing",trp_town_3_tavernkeeper,1100),
+
+(player_has_item,"itm_wool"),#满足成功条件
+```
+
+NPC回复b触发结果：任务成功领取奖励
+```python
+(call_script,"b1_quest_reward",trp_town_3_tavernkeeper,1100,"str_b1_quest_12_reward"),
+
+(troop_add_gold,"trp_player",5000),#任务奖励
+```
+
+记得把任务接取和任务完成的string写好就行了，毕竟提示还是要的。
+
+[<img src="../../../subpage/DST/myfirstsword/images/town.png" alt="回到顶端" title="返回" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;">](#jump_0)
+<span style="font-size:9px;">正儿八经看ms才10几天ww。 附一个交流QQ群：855512521(刚创的；没人；真的没有人)</span>
+
+
+
+
+
+
+
+
+
+

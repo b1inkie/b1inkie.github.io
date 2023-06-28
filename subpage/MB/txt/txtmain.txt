@@ -6,4 +6,5 @@
 4.<a href="../../../subpage/MB/txt/ex-004.html">**武器铭文系统(找你的铭文镌刻师给武器刻上铭文吧！)**</a>
 5.<a href="../../../subpage/MB/txt/ex-005.html">**<span style="color:#008000;">实用修改合集</span>**</a>
 6.<a href="../../../subpage/MB/txt/ex-006.html">**用简单触发器添加一个“放在道具栏便有加成”的物品**</a>
+7.<a href="../../../subpage/MB/txt/ex-007.html">**制作一个“对话型”任务**</a>
 B.<a href="../../../subpage/MB/txt/ex-00B.html">**<span style="color:#663399;">笔记合集</span>**</a>
