@@ -104,7 +104,7 @@ NPC回复b|看来没什么问题了，这是给你的报酬！
 NPC回复b触发结果：任务成功领取奖励
 ```python
 (call_script,"b1_quest_reward",trp_town_3_tavernkeeper,1100,"str_b1_quest_12_reward"),
-
+(troop_remove_item,"trp_player","itm_wool"),#扣除任务道具
 (troop_add_gold,"trp_player",5000),#任务奖励
 ```
 
