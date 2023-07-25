@@ -1,2 +1,3 @@
 ﻿#杂项
 1.<a href="../../../subpage/MB/others/others-001.html">**模型提取导入详细教程**</a>
+2.<a href="../../../subpage/MB/others/others-002.html">**对于刚接触MOD的童鞋的<span style="color:#dc143c;">简单</span>引导**</a>
